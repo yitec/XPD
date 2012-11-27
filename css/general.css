@@ -1,0 +1,122 @@
+body {
+ font-family: 'Yanone Kaffeesatz', arial, sans-serif;	
+ background-color: #ebebeb;	 
+	
+}
+
+.fondo_h{
+	background: -webkit-linear-gradient(#95969a,#dcdcdc);
+	background: -moz-linear-gradient(#95969a,#dcdcdc);
+	background: -o-linear-gradient(#95969a,#dcdcdc);
+	background: linear-gradient(#95969a,#dcdcdc);
+	behavior: url(border-radius.htc); /* Para IE */
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#3d3e3e', EndColorStr='#000');  
+	height: 300px;
+}
+
+.fondo_c{
+	background: -webkit-radial-gradient(#2a94c8,#066ea3);
+	background: -moz-radial-gradient(#2a94c8,#066ea3);
+	background: -o-radial-gradient(#2a94c8,#066ea3);
+	background: radial-gradient(#2a94c8,#066ea3);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#2a94c8', EndColorStr='#066ea3');
+	height: 5px;	
+}
+
+.main_frame {
+	position:relative;	
+	border: 1px ridge #DCD9D9;	
+	background-color: #fff;
+	padding: 100px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin:150px 400px;	
+	width: 300px; 
+	-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 10px 10px 5px #888;
+			
+}
+
+form { 
+    float: left;
+    border: 1px solid #ddd; 
+    padding: 30px 40px 20px 40px;     
+    width: 715px;
+    background: #fff;
+    margin-left: 250px;
+    margin-right: auto;
+    /* -- CSS3 - define rounded corners -- */	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px; 
+	border-radius: 10px;
+ 
+	/* -- CSS3 - create a background gradient -- */	
+	background: -webkit-gradient(linear, 0% 0%, 0% 40%, from(#EEE), to(#FFF)); 
+	background: -moz-linear-gradient(0% 40% 90deg,#FFF, #EEE); 
+ 
+	/* -- CSS3 - add a drop shadow -- */
+	-webkit-box-shadow:0px 0 50px #ccc;
+	-moz-box-shadow:0px 0 50px #ccc; 
+	box-shadow:0px 0 50px #ccc;
+}
+
+input, textarea { 		
+    padding: 8px; 
+    margin: 4px 0 20px 0; 
+    background: #fff; 
+    width: 220px; 
+    font-size: 14px; 
+    color: #555; 
+    border: 1px #ddd solid;
+}
+
+input:hover, textarea:hover { 
+    background: #eee; 
+}
+
+input.submit { 	
+    width: 150px; 
+    color: #eee; 
+    text-transform: uppercase; 
+    margin-top: 10px;
+    background-color: #aabf1c;
+    /*background-color: #18a5cc;*/
+    border: none;
+    
+    /* -- CSS3 Transition - define which property to animate (i.e. the shadow)  -- */
+	-webkit-transition: -webkit-box-shadow 0.3s linear;
+ 
+	/* -- CSS3 Shadow - create a shadow around each input element -- */ 
+	
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#aabf1c), to(#85a100)); 
+	background:  -moz-linear-gradient(25% 75% 90deg,#85a100, #aabf1c);
+	/* azul
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#18a5cc), to(#0a85a8)); 
+	background:  -moz-linear-gradient(25% 75% 90deg,#0a85a8, #18a5cc);
+	*/ 
+ 
+	/* -- CSS3 - Rounded Corners -- */
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px; 
+	border-radius: 4px;
+}
+
+input.submit:hover { 		
+    -webkit-box-shadow: 0px 0px 20px #555;
+    -moz-box-shadow: 0px 0px 20px #aaa; 
+    box-shadow: 0px 0px 20px #555;		
+    cursor:  pointer; 
+}
+
+label {	
+    font-size: 20px;
+    color: #666; 
+}
+ 
+fieldset { border: none; }
+
+textarea {		
+    width: 390px; 
+    height: 175px; 		 		
+}
