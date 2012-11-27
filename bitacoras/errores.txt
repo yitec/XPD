@@ -1,0 +1,5 @@
+Error: exception 'Exception' with message 'Table 'bd_xpd.tbl_agenda' doesn't exist' in C:\AppServ\www\XPD\operaciones\opr_agenda.php:39
+Stack trace:
+#0 C:\AppServ\www\XPD\operaciones\opr_agenda.php(22): throw_ex('Table 'bd_xpd.t...')
+#1 C:\AppServ\www\XPD\operaciones\opr_agenda.php(18): eventos('1')
+#2 {main} 	 now()
