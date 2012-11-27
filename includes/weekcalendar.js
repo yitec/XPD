@@ -100,8 +100,8 @@ $(document).ready(function() {
          var startField = $dialogContent.find("select[name='start']").val(calEvent.start);
          var endField = $dialogContent.find("select[name='end']").val(calEvent.end);
          var titleField = $dialogContent.find("input[name='title']").val(calEvent.title);
-         var bodyField = $dialogContent.find("textarea[name='body']");
-         bodyField.val(calEvent.body);
+         var bodyField = $dialogContent.find("textarea[name='body']").val(calEvent.body);
+         //bodyField.val(calEvent.body);
 
          $dialogContent.dialog({
             modal: true,
@@ -243,7 +243,7 @@ function obtiene_eventos(){
 	var total=v_eventos.length;
 	for(var i=0;i<v_eventos.length;i++){
 		v_detalles=v_eventos[i].split("/");
-		vari={"id":v_detalles[0], "start": v_detalles[1], "end": v_detalles[2],"title":v_detalles[3]};
+		vari={"id":v_detalles[0], "start": v_detalles[1], "end": v_detalles[2],"title":v_detalles[3],"body":v_detalles[4]};
 		eventData.events.push(vari);
 	}	
 }	

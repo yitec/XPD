@@ -42,7 +42,7 @@ function eventos($usuario) {
 				$eventos=$eventos."|".$row->id."/".$row->evento;
 			}
 		}			
-		$jsondata['evento']=$eventos;
+		$jsondata['evento']=utf8_encode($eventos);
 		desconectar();			
 	}
 	catch(exception $e){
@@ -55,42 +55,44 @@ function eventos($usuario) {
 
 function agregar($usuario,$fecha_ini,$fecha_fin,$titulo,$detalles){
 	try{
-	$evento=$fecha_ini."/".$fecha_fin."/".$titulo."/".$detalles;
-	$result=mysql_query("insert into tbl_agenda (id_usuario,evento,estado)values('".$usuario."','".$evento."','"."1"."')")or throw_ex(mysql_error());
-	$jsondata['resultado']="Success";
+		$evento=utf8_decode($fecha_ini."/".$fecha_fin."/".$titulo."/".$detalles);
+		$result=mysql_query("insert into tbl_agenda (id_usuario,evento,estado)values('".$usuario."','".$evento."','"."1"."')")or throw_ex(mysql_error());
+		$jsondata['resultado']="Success";
 	}
 	catch (exception $e){
 		bitacora($e);
 		$jsondata['Error'];
 	}
 	echo json_encode($jsondata);
+	desconectar();	
 }
 		
 function modificar($id,$usuario,$fecha_ini,$fecha_fin,$titulo,$detalles){
 	try{
-	$evento=utf8_encode($fecha_ini."/".$fecha_fin."/".$titulo."/".$detalles)	;
-	$result=mysql_query("update tbl_agenda set evento='".$evento."' where id='".$id."'")or throw_ex(mysql_error());
-	$jsondata['resultado']="Success";
+		$evento=utf8_decode($fecha_ini."/".$fecha_fin."/".$titulo."/".$detalles)	;
+		$result=mysql_query("update tbl_agenda set evento='".$evento."' where id='".$id."'")or throw_ex(mysql_error());
+		$jsondata['resultado']="Success";
 	}
 	catch (exception $e){
 		bitacora($e);
 		$jsondata['Error'];
 	}
 	echo json_encode($jsondata);
+	desconectar();	
 }
 
 
 function eliminar($id){
-	try{
-	
-	$result=mysql_query("delete from tbl_agenda  where id='".$id."'")or throw_ex(mysql_error());
-	$jsondata['resultado']="Success";
+	try{	
+		$result=mysql_query("delete from tbl_agenda  where id='".$id."'")or throw_ex(mysql_error());
+		$jsondata['resultado']="Success";
 	}
 	catch (exception $e){
 		bitacora($e);
 		$jsondata['Error'];
 	}
 	echo json_encode($jsondata);
+	desconectar();	
 }
 
 		
