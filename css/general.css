@@ -1,4 +1,6 @@
 body {
+ margin: 0px;
+ margin-top: 0px;
  font-family: 'Yanone Kaffeesatz', arial, sans-serif;	
  background-color: #ebebeb;	 
 	
@@ -37,15 +39,22 @@ body {
 	box-shadow: 10px 10px 5px #888;
 			
 }
-
-form { 
-    float: left;
+h1{
+	width: 100%;
+	background: -webkit-linear-gradient(gray,black);
+	background: -moz-linear-gradient(gray,black);
+	background: -o-linear-gradient(gray,black);
+	background: linear-gradient(gray,black);
+}
+.box { 
+    position:relative;
+    margin: auto;
+    margin-top: 150px;      
     border: 1px solid #ddd; 
     padding: 30px 40px 20px 40px;     
-    width: 715px;
+    width: 250px;
     background: #fff;
-    margin-left: 250px;
-    margin-right: auto;
+
     /* -- CSS3 - define rounded corners -- */	
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px; 
@@ -56,9 +65,9 @@ form {
 	background: -moz-linear-gradient(0% 40% 90deg,#FFF, #EEE); 
  
 	/* -- CSS3 - add a drop shadow -- */
-	-webkit-box-shadow:0px 0 50px #ccc;
-	-moz-box-shadow:0px 0 50px #ccc; 
-	box-shadow:0px 0 50px #ccc;
+	-webkit-box-shadow:0px 0 20px #000;
+	-moz-box-shadow:0px 0 20px #000; 
+	box-shadow:0px 0 20px #000;
 }
 
 input, textarea { 		
