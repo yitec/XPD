@@ -1,3 +1,6 @@
+<?
+session_start();
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,7 +11,7 @@
         <title>Menu Principal</title>
     </head>
     <body >
-    		<h1>Salir</h1>        	    	
+    		<h4>Usuario=<?=$_SESSION['nombre_usuario'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir&nbsp;&nbsp;&nbsp;</h1>        	    	
     		<div class="box_mprincipal">
                 <div id="centrado_menu">
         	       <div class="navi1">
