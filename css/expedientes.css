@@ -1,0 +1,35 @@
+#expedientes{
+	width: 100px;	
+}
+
+#clientes{	
+	width: 200px;	
+}
+
+#creacion{
+	width: 150px;	
+}
+
+#actualizacion{
+	width: 200px;	
+}
+
+#status{
+	width: 100px;	
+}
+#archivo{
+	width: 400px;	
+}
+#acciones{
+	width: 90px;	
+}
+.iconos{
+	margin-left: 10px;
+}
+table{
+	width: 100%;
+}
+/* Zebra striping */
+tr:nth-child(2n+1) { 
+	background: #eef1ed; 
+}
