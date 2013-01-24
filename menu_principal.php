@@ -11,17 +11,18 @@ session_start();
         <title>Menu Principal</title>
     </head>
     <body >
-    		<h4>Usuario=<?=$_SESSION['nombre_usuario'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir&nbsp;&nbsp;&nbsp;</h1>        	    	
+    		<div id="barra_principal"></div>        	    	
+            <?include ('menu_superior.php');?>
     		<div class="box_mprincipal">
                 <div id="centrado_menu">
         	       <div class="navi1">
                         <ul>
                         <li class="sm1"><a href="agenda.html"></a></li>
                         <li class="sm2"><a href="expedientes.php"></a></li>
-                        <li class="sm3"><a href="URL_enlace3"></a></li>
-                        <li class="sm4"><a href="URL_enlace4"></a></li>
-                        <li class="sm5"><a href="URL_enlace5"></a></li>
-                        <li class="sm6"><a href="URL_enlace6"></a></li>
+                        <li class="sm3"><a href="reportes/menu_reportes.php"></a></li>
+                        <li class="sm4"><a href="cobros.php"></a></li>
+                        <li class="sm5"><a href="usuarios.php"></a></li>
+                        <li class="sm6"><a href="clientes.php"></a></li>
                         </ul>
                     </div>
                 </div>

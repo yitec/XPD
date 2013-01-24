@@ -64,7 +64,7 @@ body {
 .box_mprincipal { 
     position:relative;
     margin: auto;
-    margin-top: 150px;      
+    margin-top: 100px;      
     border: 1px solid #b1b8c0; 
     width: 920px;
     background: #fff; 
@@ -155,6 +155,13 @@ input.submit:hover {
     cursor:  pointer; 
 }
 
+a:link {
+  text-decoration: none;
+  color: #7c76fe;
+}
+a:hover{
+  color: #a1e44d;
+}
 label {	
     font-size: 20px;
     color: #666; 
@@ -176,17 +183,11 @@ h1{
 	background: linear-gradient(gray,black);
 }
 
-h4{
-	margin-top: 0px;
-	width: 100%;
-	height: 40px;
-	background: -webkit-linear-gradient(gray,black);
-	background: -moz-linear-gradient(gray,black);
-	background: -o-linear-gradient(gray,black);
-	background: linear-gradient(gray,black);
-	text-align: right;
-	color: #00D9FF;
+h2{
+    position:relative;
+    text-align: center;
 }
+
 
 /********************************************************Menu Principal**********************************************/
 
@@ -251,11 +252,11 @@ h4{
 	/* -- CSS3 Shadow - create a shadow around each input element -- */ 	
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ECECEC), to(#E1E1E1)); 
 	background:  -moz-linear-gradient(25% 75% 90deg,#c2bdc0, #d1d0d1);	
-	color: #f6691d;
+	color: #a2a59f;
 	border-radius: 0px 0px 5px 5px;
 	text-align: center;
 	padding-top: 10px;
-float: none;
+  float: none;
 }
 
 #centrado_menu{
@@ -268,7 +269,17 @@ float: none;
 } 
 
 /***************************************************Barras Titulo***************************************************/
-
+#barra_principal{
+  margin-top: 0px;
+  width: 100%;
+  height: 40px;
+  background: -webkit-linear-gradient(gray,black);
+  background: -moz-linear-gradient(gray,black);
+  background: -o-linear-gradient(gray,black);
+  background: linear-gradient(gray,black);
+  text-align: right;
+  color: #fff;
+}
 #search {
 	vertical-align: 40px;
 	margin-left: 500px;		
@@ -283,6 +294,16 @@ float: none;
 	font-size: 18px;
 	font-weight: bold;
 	color: #292929;
+}
+
+#navegacion {
+  position: relative;
+  margin-top: 10px;
+  text-align: right;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+
 }
 
 /****************************************************Tooltip*****************************************************/

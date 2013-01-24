@@ -13,7 +13,8 @@ session_start();
         <title>Expedientes</title>
     </head>
     <body >
-    		<h4>Usuario=<?=$_SESSION['nombre_usuario'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir&nbsp;&nbsp;&nbsp;</h1>        	    	
+    		<div id="barra_principal"></div>                  
+            <?include ('menu_superior.php');?>
     		<div class="box_mprincipal">
                 <div class="sub_header">
                     <span id="add"><a href="add.php"><img src="img/add.png" title="Crear un expediente."></a></span>
