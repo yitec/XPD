@@ -112,7 +112,8 @@ body {
 
 /**************************************************Controles*********************************************************/
 
-input, textarea { 		
+
+.inputbox{
     padding: 8px; 
     margin: 0px 0 20px 0; 
     background: #fff; 
@@ -120,10 +121,10 @@ input, textarea {
     font-size: 14px; 
     color: #555; 
     border: 1px #ddd solid;
-    /* -- CSS3 - define rounded corners -- */	
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px; 
-	border-radius: 5px;   
+    /* -- CSS3 - define rounded corners -- */ 
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px; 
+  border-radius: 5px;     
 }
 
 input:hover, textarea:hover { 
@@ -260,7 +261,8 @@ h2{
 }
 
 #centrado_menu{
-	margin: 40px;	
+  position: relative;
+	margin: 65px;
 }
 
 #add { 	

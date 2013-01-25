@@ -18,7 +18,7 @@ session_start();
     		<div class="box_mprincipal">
                 <div class="sub_header">
                     <span id="add"><a href="add.php"><img src="img/add.png" title="Crear un cliente"></a></span>
-                    <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txt_buscar" title="Buscar un cliente." value="" /></span>                    
+                    <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" title="Buscar un cliente." value="" /></span>                    
                     <span id="search_icon"><img  src="img/search.png"></span>                    
                 </div> 
                     <h2>Clientes</h2>               

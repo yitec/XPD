@@ -18,7 +18,7 @@ session_start();
     		<div class="box_mprincipal">
                 <div class="sub_header">
                     <span id="add"><a href="add.php"><img src="img/add.png" title="Crear un expediente."></a></span>
-                    <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txt_buscar" title="Buscar un expediente." value="" /></span>                    
+                    <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" title="Buscar un expediente." value="" /></span>                    
                     <span id="search_icon"><img  src="img/search.png"></span>                    
                 </div>                
                     <div class="box_contenidos">   
@@ -33,8 +33,8 @@ session_start();
                     <tr>                        
                         <td>132344-AB</td>
                         <td>SERGIO BARRANTES M</td>
-                        <td>2-7-2012</td>
-                        <td>2-12-2012</td>
+                        <td>2-7-2008</td>
+                        <td>23-11-2012</td>
                         <td>ACTIVO</td>
                     </tr>
                     </table>            
@@ -43,8 +43,8 @@ session_start();
                     <table>
                     <tr class="subtitulos">                        
                         <td id="archivo">Archivo</td>
-                        <td id="creacion">Creacion</td>
-                        <td id="actualizacion">Modificacion</td>
+                        <td id="creacion">Creación</td>
+                        <td id="actualizacion">Modificación</td>
                         <td id="acciones">Operaciones</td>                        
                     </tr>
                     <tr>                        
@@ -55,21 +55,21 @@ session_start();
                     </tr>
                     <tr>                        
                         <td>Resolución Judicial Final de conciliación</td>
-                        <td>23-1-1998</td>
+                        <td>23-1-2009</td>
                         <td>01-7-2010</td>
                         <td><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td>                       
                     </tr>
                     <tr>                        
-                        <td>132344-AB</td>
-                        <td>SERGIO BARRANTES M</td>
-                        <td>2-7-2012</td>
-                        <td>2-12-2012</td>                       
+                        <td>Aclaracion Juridica</td>
+                        <td>23-1-2005</td>
+                        <td>01-7-2016</td>
+                        <td><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td>
                     </tr>
                     <tr>                        
-                        <td>132344-AB</td>
-                        <td>SERGIO BARRANTES M</td>
-                        <td>2-7-2012</td>
-                        <td>2-12-2012</td>                       
+                        <td>Acta vredicto final</td>
+                        <td>23-11-2012</td>
+                        <td>23-11-2012</td>
+                        <td><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td>
                     </tr>
                     </table>            
                     </div>

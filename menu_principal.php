@@ -17,7 +17,7 @@ session_start();
                 <div id="centrado_menu">
         	       <div class="navi1">
                         <ul>
-                        <li class="sm1"><a href="agenda.html"></a></li>
+                        <li class="sm1"><a href="agenda.php"></a></li>
                         <li class="sm2"><a href="expedientes.php"></a></li>
                         <li class="sm3"><a href="reportes/menu_reportes.php"></a></li>
                         <li class="sm4"><a href="cobros.php"></a></li>
