@@ -77,6 +77,8 @@ conectar();
                     </tr>
                     </table>            
                     </div>
+                    <div id="contenido">
+                    </div>    
 
              
                 <div class="sub_footer">Seleccione una opción</div>                

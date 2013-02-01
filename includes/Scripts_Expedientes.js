@@ -19,6 +19,7 @@ $(document).ready(function(){
 					notificacion("Error","El expediente ya existe o ha sucedido un error","error");					
 				}else{
 					notificacion("Nuevo Expediente","El Expediente fue guardado exitosamente.","info");
+					despliega_archivos(data.ultimo_id,data.numero_expediente);
 				}				
 			} 
 			});
@@ -53,7 +54,7 @@ $( document ).tooltip({
       }
 });
 
-/************************************Tool Tip************************************************************/
+/************************************Notificaciones Jquery************************************************************/
 function notificacion(titulo,cuerpo,tipo){
 	$.pnotify({
 	pnotify_title: titulo,
@@ -61,6 +62,26 @@ function notificacion(titulo,cuerpo,tipo){
     pnotify_type: tipo,
     pnotify_hide: true
 	});	
+}
+
+/************************************Notificaciones Jquery************************************************************/
+function despliega_archivos(id,numero){
+	var parametros=id+","+numero;
+	$.ajax({ data: "metodo=despliega_archivos&parametros="+parametros,
+			type: "POST",
+			dataType: "json",
+			url: "../operaciones/Clase_Expedientes.php",
+			success: function(datos){ 
+					var dataJson = eval(datos);
+            			$("#contenido").empty();
+            			$("#contenido").append('<div class="box_contenidos"><table><tr class="subtitulos"><td>Archivo</td><td id="clientes">Fecha Creacion</td><td id="creacion">Fecha Modificacion</td><td id="actualizacion">Operaciones</td></tr>');
+            		for(var i in dataJson){
+                		$("#contenido").append('<tr><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td></tr>');
+                		//alert(dataJson[i].id + " _ " + dataJson[i].nombre_archivo + " _ " + dataJson[i].id_tipo+ " _ " + dataJson[i].fecha_creacion + " _ " + dataJson[i].fecha_modificacion);
+                	}
+                	$("#contenido").append('</table></div>');
+			} 
+	});
 }
 
 })// Document ready Final

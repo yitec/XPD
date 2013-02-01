@@ -22,10 +22,31 @@ class Expedientes{
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
-        	$jsondata['resultado'] = "Success";         	
+        	$jsondata['resultado'] = "Success";
+        	$jsondata['ultimo_id']=mysql_insert_id();
+        	$jsondata['numero_expediente'] = $v_datos[0];         	
         }
-        echo json_encode($jsondata);
-		
+        echo json_encode($jsondata);		
+	}
+
+	function despliega_archivos($parametros,$hoy){
+		$v_datos=explode(",",$parametros);
+		$id=$v_datos[0];
+		$numero=$v_datos[1];
+		$result=mysql_query("select * from tbl_archivos where id_expediente='".$id."' ");
+		if (!$result) {//si da error que me despliegue el error del query       		
+       		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+        }else{
+        	while ($row=mysql_fetch_object($result)){							
+				$arr[] = array('id' => $row->id,
+                   				'nombre_archivo' => $row->nombre_archivo,
+                   				'id_tipo' => $row->id_tipo,
+                   				'fecha_creacion' => $row->fecha_creacion,
+                   				'fecha_modificacion' => $row->fecha_modificacion,
+        		);
+			}	
+        }
+        echo json_encode($arr);		
 	}
 
 }
