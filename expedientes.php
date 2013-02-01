@@ -1,5 +1,7 @@
 <?
 session_start();
+require_once('cnx/conexion.php');
+conectar();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,6 +12,8 @@ session_start();
         <link rel ="stylesheet" href="css/expedientes.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="includes/themes/base/jquery-ui-1.10.0.custom.css" />
+        <link href="css/jquery.pnotify.default.css" rel="stylesheet" type="text/css" />
         <title>Expedientes</title>
     </head>
     <body >
@@ -17,7 +21,7 @@ session_start();
             <?include ('menu_superior.php');?>
     		<div class="box_mprincipal">
                 <div class="sub_header">
-                    <span id="add"><a href="add.php"><img src="img/add.png" title="Crear un expediente."></a></span>
+                    <span id="add"><img src="img/add.png" id="boton_add" title="Crear un expediente."></span>
                     <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" title="Buscar un expediente." value="" /></span>                    
                     <span id="search_icon"><img  src="img/search.png"></span>                    
                 </div>                
@@ -76,10 +80,34 @@ session_start();
 
              
                 <div class="sub_footer">Seleccione una opción</div>                
-			</div>		
+			</div>
+<!-- ---------------------------------------------Ventana Modal-------------------------------------------------------- -->
+<div id="dialog-form" title="Crear nuevo expediente">
+  <p class="validateTips">Ingrese la información.</p>
+ 
+  <form>
+  <fieldset>
+    <div class="separacion"><label for="numero" class="labels">Numero Expediente</label></div>
+    <div class="separacion"><input type="text" name="txt_numero" id="txt_numero" class="inputbox_peq" /></div>
+    <div class="separacion"><label for="tipo" class="labels">Tipo Expediente</label></div>    
+    <div class="separacion">
+    <select name="cmb_categoria" id="cmb_categoria">
+    <?
+    $result=mysql_query("select * from tbl_catExpedientes where estado=1");
+    while($row=mysql_fetch_object($result)){
+        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
+    }
+    ?>
+    </select>
+    </div>
+  </fieldset>
+  </form>
+</div>
+
     </body>
-<script type="text/javascript" src="includes/jquery-1.9.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>    
-<script src="includes/expedientes.js"></script>    
+<script type="text/javascript" src="includes/jquery-1.9.0.min.js"></script>   
+<script src="includes/ui/jquery-ui.js"></script> 
+<script type="text/javascript" src="includes/Scripts_Expedientes.js"></script>
+<script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
 </html>
 
