@@ -25,6 +25,8 @@ h4{
 	text-align: right;
 	color: #00D9FF;
 }
+
+
 .fondo_h{
 	background: -webkit-linear-gradient(#95969a,#dcdcdc);
 	background: -moz-linear-gradient(#95969a,#dcdcdc);
@@ -58,6 +60,7 @@ h4{
 	box-shadow: 10px 10px 5px #888;
 			
 }
+/***************************************************Boxes*****************************************************/
 
 .box { 
     position:relative;
@@ -82,9 +85,9 @@ h4{
 .box_mprincipal { 
     position:relative;
     margin: auto;
-    margin-top: 150px;      
+    margin-top: 100px;      
     border: 1px solid #b1b8c0; 
-    width: 820px;
+    width: 920px;
     background: #fff; 
     /* -- CSS3 - define rounded corners -- */	
 	-webkit-border-radius: 5px;
@@ -99,6 +102,27 @@ h4{
 	box-shadow:5px 5px 5px #919191;
 }
 
+.box_contenidos { 
+    position:relative;
+    margin: auto;
+    margin-top: 20px;      
+    border: 1px solid #b1b8c0; 
+    width: 820px;
+    background: #fff; 
+    /* -- CSS3 - define rounded corners -- */	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px; 
+	border-radius: 5px;   
+	/* -- CSS3 - create a background gradient -- */	
+	background: -webkit-gradient(linear, 0% 0%, 0% 40%, from(#EEE), to(#FFF)); 
+	background: -moz-linear-gradient(0% 40% 90deg,#FFF, #EEE); 
+	/* -- CSS3 - add a drop shadow -- */
+	-webkit-box-shadow:1px 1px 1px #919191;
+	-moz-box-shadow:1px 1px 1px #919191; 
+	box-shadow:1px 1px 1px #919191;
+	
+}
+
 .box_msecundario { 
     position:relative;
     margin: auto;        
@@ -107,22 +131,44 @@ h4{
     background: #fff;
 }
 
-input, textarea { 		
+/**************************************************Controles*********************************************************/
+
+
+.inputbox{
     padding: 8px; 
-    margin: 4px 0 20px 0; 
+    margin: 0px 0 20px 0; 
     background: #fff; 
     width: 220px; 
     font-size: 14px; 
     color: #555; 
     border: 1px #ddd solid;
+    /* -- CSS3 - define rounded corners -- */ 
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px; 
+  border-radius: 5px;     
+}
+
+.inputbox_peq{
+    font-family: Arial;  
+    padding: 2px; 
+    background: #fff; 
+    width: 200px; 
+    font-size: 20px; 
+    color: #555; 
+    border: 1px #ddd solid;
+    /* -- CSS3 - define rounded corners -- */ 
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px; 
+  border-radius: 5px;     
 }
 
 input:hover, textarea:hover { 
-    background: #eee; 
+    background: #fafafa; 
 }
 
 input.submit { 	
     width: 150px; 
+    height: 40px;
     color: #eee; 
     text-transform: uppercase; 
     margin-top: 10px;
@@ -140,12 +186,19 @@ input.submit {
 }
 
 input.submit:hover { 		
-    -webkit-box-shadow: 0px 0px 20px #555;
-    -moz-box-shadow: 0px 0px 20px #aaa; 
-    box-shadow: 0px 0px 20px #555;		
+    -webkit-box-shadow: 0px 0px 10px #555;
+    -moz-box-shadow: 0px 0px 10px #aaa; 
+    box-shadow: 0px 0px 10px #555;		
     cursor:  pointer; 
 }
 
+a:link {
+  text-decoration: none;
+  color: #7c76fe;
+}
+a:hover{
+  color: #a1e44d;
+}
 label {	
     font-size: 20px;
     color: #666; 
@@ -158,7 +211,23 @@ textarea {
     height: 175px; 		 		
 }
 
-/***********************************Menu Principal*******************************/
+h1{
+	margin-top: 0px;
+	width: 100%;
+	background: -webkit-linear-gradient(gray,black);
+	background: -moz-linear-gradient(gray,black);
+	background: -o-linear-gradient(gray,black);
+	background: linear-gradient(gray,black);
+}
+
+h2{
+    position:relative;
+    text-align: center;
+}
+
+
+/********************************************************Menu Principal**********************************************/
+
 #nav li a {background-image:url('../img/icons_sprite.png')}
 
 .navi1 ul li.sm1 { background-position: 0px 0px; left: 0px; width: 130px;  }
@@ -166,12 +235,13 @@ textarea {
 .navi1 ul li.sm3 { margin-left: 30px;background-position: -265px 0px; left: 240px; width: 120px; }
 .navi1 ul li.sm4 { margin-left: 40px;background-position: -395px 0px; left: 360px; width: 120px; }
 .navi1 ul li.sm5 { margin-left: 30px;background-position: -520px 0px; left: 500px; width: 120px; }
+.navi1 ul li.sm6 { margin-left: 32px;background-position: -648px 0px; left: 630px; width: 120px; }
 .navi1 {
   display: block;
   height: 120px;
-  margin:0 auto;
+  margin:auto auto;
   position: relative;
-  width: 625px;
+  width: 920px;
 }
 .navi1 ul {
   float: none;
@@ -193,21 +263,145 @@ textarea {
   height: 100%;
   width: 100%;
 }
-/**********************************sub footer**********************/
-.sub_footer{
+
+/**********************************************************sub header***********************************************/
+.sub_header{
 	width:100%;
 	height: 40px;
-	background:#3a3a3a;	
-	color: #f6691d;
+	/* -- CSS3 Transition - define which property to animate (i.e. the shadow)  -- */
+	-webkit-transition: -webkit-box-shadow 0.3s linear;
+	/* -- CSS3 Shadow - create a shadow around each input element -- */ 	
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ECECEC), to(#E1E1E1)); 
+	background:  -moz-linear-gradient(25% 75% 90deg,#c2bdc0, #d1d0d1);	
+	/* -- CSS3 - Rounded Corners -- */	
+	border-radius: 5px 5px 0px 0px;	
+	padding-top: 10px;
+	float: none;
+}
+
+/**********************************************************sub footer*********************************************/
+.sub_footer{
+	margin-top: 100px;
+	width:100%;
+	height: 40px;
+	/* -- CSS3 Transition - define which property to animate (i.e. the shadow)  -- */
+	-webkit-transition: -webkit-box-shadow 0.3s linear;
+	/* -- CSS3 Shadow - create a shadow around each input element -- */ 	
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ECECEC), to(#E1E1E1)); 
+	background:  -moz-linear-gradient(25% 75% 90deg,#c2bdc0, #d1d0d1);	
+	color: #a2a59f;
 	border-radius: 0px 0px 5px 5px;
 	text-align: center;
 	padding-top: 10px;
-
+  float: none;
 }
 
 #centrado_menu{
-	padding: 80px;
-	vertical-align: center;
+  position: relative;
+	margin: 65px;
+}
+
+#add { 	
+	vertical-align: 30px;
+	margin-left: 20px;	
+} 
+
+/***************************************************Barras Titulo***************************************************/
+#barra_principal{
+  margin-top: 0px;
+  width: 100%;
+  height: 40px;
+  background: -webkit-linear-gradient(gray,black);
+  background: -moz-linear-gradient(gray,black);
+  background: -o-linear-gradient(gray,black);
+  background: linear-gradient(gray,black);
+  text-align: right;
+  color: #fff;
+}
+#search {
+	vertical-align: 40px;
+	margin-left: 500px;		
+}
+
+#search_icon {
+	vertical-align: 30px;	
+	margin-left: 10px;		
+} 
+
+.subtitulos{
+	font-size: 18px;
+	font-weight: bold;
+	color: #292929;
+}
+
+#navegacion {
+  position: relative;
+  margin-top: 10px;
+  text-align: right;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
 
 }
+
+/********************************************Formularios**********************************************************/
+.separacion{
+  margin-top: 10px;
+}
+
+.labels{
+  font-size: 14px;
+  font-weight: bold;
+  color: #292929;
+}
+
+/****************************************************Tooltip*****************************************************/
+.ui-tooltip, .arrow:after {
+    background: white;
+    border: 2px solid white;
+     font-size: 62.5%;
+  }
+  .ui-tooltip {
+  	 font-size: 62.5%;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    font-family: 'Open Sans Condensed',  sans-serif;
+   
+    box-shadow: 0 0 7px black;
+  }
+  .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }
 
