@@ -3,3 +3,8 @@ Stack trace:
 #0 C:\AppServ\www\XPD\operaciones\opr_agenda.php(22): throw_ex('Table 'bd_xpd.t...')
 #1 C:\AppServ\www\XPD\operaciones\opr_agenda.php(18): eventos('1')
 #2 {main} 	 now()
+Error: exception 'Exception' with message 'No database selected' in C:\AppServ\www\XPD\operaciones\opr_agenda.php:108
+Stack trace:
+#0 C:\AppServ\www\XPD\operaciones\opr_agenda.php(34): throw_ex('No database sel...')
+#1 C:\AppServ\www\XPD\operaciones\opr_agenda.php(18): eventos('1')
+#2 {main} 	 now()
