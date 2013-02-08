@@ -299,7 +299,7 @@ h2{
 }
 #search {
 	vertical-align: 40px;
-	margin-left: 500px;		
+	margin-left: 450px;		
 }
 
 #search_icon {
@@ -343,7 +343,7 @@ h2{
   .ui-tooltip {
   	 font-size: 62.5%;
     padding: 10px 20px;
-    color: white;
+    color: #fff;
     border-radius: 20px;
     font-family: 'Open Sans Condensed',  sans-serif;
    
