@@ -49,6 +49,20 @@ class Expedientes{
         echo json_encode($arr);		
 	}
 
+	/*******************************************************
+	accion="Sube los archivos a la carpeta archivos"
+	parametros="nombre del archivo"
+
+	********************************************************/
+	function sube_archivo($parametros,$hoy){
+		$v_datos=explode(",",$parametros);
+		$archivo=$v_datos[0];
+		$destino =  "archivos/".$archivo;
+		if (copy($_FILES['archivo']['tmp_name'],$destino)) {
+		}
+
+	}
+
 }
 
 ?>

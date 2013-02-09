@@ -1,7 +1,9 @@
 $(document).ready(function(){
 
 	var allFields = $( [] ).add( txt_numero );
-/***************************************Dialog Form*************************************************************/
+  boton_subir();
+ 
+/***************************************Dialog Form Crear Expediente*************************************************************/
     $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 350,
@@ -37,6 +39,30 @@ $(document).ready(function(){
     $( "#boton_add" ).click(function() {
         $( "#dialog-form" ).dialog( "open" );
     });
+
+/***************************************Dialog Form Crear archivo*************************************************************/
+    $( "#dialog-form-subir" ).dialog({
+      autoOpen: false,
+      height: 350,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Subir Archivo": function() {
+              
+          $( this ).dialog( "close" );
+        },
+        Cancelar: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        allFields.val( "" ).removeClass( "ui-state-error" );
+      }
+    });
+ 
+    $( "#boton_subir" ).click(function() {
+        $( "#dialog-form-subir" ).dialog( "open" );
+    });
   
 /************************************Tool Tip************************************************************/
 $( document ).tooltip({
@@ -66,6 +92,7 @@ function notificacion(titulo,cuerpo,tipo){
 
 /************************************Notificaciones Jquery************************************************************/
 function despliega_archivos(id,numero){
+	var vhtml='';
 	var parametros=id+","+numero;
 	$.ajax({ data: "metodo=despliega_archivos&parametros="+parametros,
 			type: "POST",
@@ -74,14 +101,43 @@ function despliega_archivos(id,numero){
 			success: function(datos){ 
 					var dataJson = eval(datos);
             			$("#contenido").empty();
-            			$("#contenido").append('<div class="box_contenidos"><table><tr class="subtitulos"><td>Archivo</td><td id="clientes">Fecha Creacion</td><td id="creacion">Fecha Modificacion</td><td id="actualizacion">Operaciones</td></tr>');
-            		for(var i in dataJson){
-                		$("#contenido").append('<tr><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td></tr>');
-                		//alert(dataJson[i].id + " _ " + dataJson[i].nombre_archivo + " _ " + dataJson[i].id_tipo+ " _ " + dataJson[i].fecha_creacion + " _ " + dataJson[i].fecha_modificacion);
-                	}
-                	$("#contenido").append('</table></div>');
+            			vhtml='<div class="box_contenidos"><table><tr class="subtitulos"><td>Archivo</td><td id="clientes">Fecha Creacion</td><td id="creacion">Fecha Modificacion</td><td id="actualizacion">Operaciones</td></tr>';
+            			for(var i in dataJson){
+                			vhtml=vhtml+'<tr><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td></tr>';                	
+	                	}
+                	vhtml=vhtml+'</table></div>';
+					$('#contenido').append(vhtml);
+
 			} 
 	});
 }
+
+
+
+function boton_subir(){
+  var button = $('#upload_button'), interval;
+  new AjaxUpload('#upload_button', {
+        action: '../upload.php',
+    onSubmit : function(file , ext){
+    if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+      // extensiones permitidas
+      alert('Error: Solo se permiten imagenes');
+      // cancela upload
+      return false;
+    } else {
+      button.text('Uploading');
+      this.disable();
+    }
+    },
+    onComplete: function(file, response){
+      button.text('Upload');
+      // enable upload button
+      this.enable();      
+      // Agrega archivo a la lista
+      $('#lista').appendTo('.files').text(file);
+    } 
+  });
+}
+
 
 })// Document ready Final
