@@ -23,7 +23,7 @@ conectar();
     		<div class="box_mprincipal">
                 <div class="sub_header">
                     <span id="add"><img src="img/add.png" id="boton_add" title="Crear un expediente."></span>
-                    <span id="boton_subir"><input  value="Subir Archivo" name="submit" id="upload_button" class="subir" />               </span>
+                    <span id="boton_subir"><input  value="Subir Archivo" title="Subir Archivo."  name="submit" id="boton_subir" type="image"  src="img/upload.png" /></span>
                     <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" title="Buscar un expediente." value="" /></span>                    
                     <span id="search_icon"><img  src="img/search.png"></span>                    
                 </div>                
@@ -78,15 +78,12 @@ conectar();
                     </tr>
                     </table>            
                     </div>
-                    <div id="contenido">                        
-                    </div>    
-                    <ul id="lista">
-</ul>
+</div>                                                   
                     
              
                 <div class="sub_footer">Seleccione una opción</div>                
 			</div>
-<!-- ---------------------------------------------Ventana Modal-------------------------------------------------------- -->
+<!-- ---------------------------------------------Ventana Modal Crear Expediente-------------------------------------------------------- -->
 <div id="dialog-form" title="Crear nuevo expediente">
   <p class="validateTips">Ingrese la información.</p>
  
@@ -108,19 +105,22 @@ conectar();
   </fieldset>
   </form>
 </div>
-
-<div id="dialog-form-subir" title="Subir un archivo">
+<!-- ---------------------------------------------Ventana Modal Archivo-------------------------------------------------------- -->
+<div class="but" id="upload_button">Upload</div>                  
+  <div id="dialog-form-subir" title="Subir un archivo">
   <p class="validateTips">Seleccione el archivo.</p>
-  
-  
-  
-</div>
+    <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+    <div id="progress"></div>
+  </div>
+
 
     </body>
 <script src="includes/jquery-1.9.0.min.js"type="text/javascript" ></script>   
 <script src="includes/ui/jquery-ui.js"></script> 
 <script src="includes/Scripts_Expedientes.js"type="text/javascript" ></script>
 <script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
-<script src="includes/ajaxupload.js"language="javascript"></script>
+<script src="includes/vendor/jquery.ui.widget.js"></script>
+<script src="includes/jquery.iframe-transport.js"></script>
+<script src="includes/jquery.fileupload.js"></script>
 </html>
 

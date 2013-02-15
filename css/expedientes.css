@@ -35,28 +35,8 @@ tr:nth-child(2n+1) {
 }
 
 #boton_subir { 	
-	vertical-align: 40px;
-	margin-left: 20px;	
-}
-
-input.subir { 	
-	text-align: center;
-    width: 120px; 
-    height: 30px;
-    color: #eee; 
-    text-transform: uppercase; 
-    margin-top: 0px;
-    background-color: #aabf1c;    
-    border: none;    
-    /* -- CSS3 Transition - define which property to animate (i.e. the shadow)  -- */
-	-webkit-transition: -webkit-box-shadow 0.3s linear;
-	/* -- CSS3 Shadow - create a shadow around each input element -- */ 	
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#AFD957), to(#83A53F)); 
-	background:  -moz-linear-gradient(25% 75% 90deg,#83A53F, #AFD957);	
-	/* -- CSS3 - Rounded Corners -- */
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px; 
-	border-radius: 4px;
+	vertical-align: 15px;
+	margin-left: 10px;	
 }
 
 input.subir:hover { 		

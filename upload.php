@@ -1,13 +1,10 @@
-<?php 
-// defino la carpeta para subir
-$uploaddir = 'archvivos/';
-// defino el nombre del archivo
+<?php
+$uploaddir = 'uploads/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
-// Lo mueve a la carpeta elegida
+
 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
   echo "success";
 } else {
   echo "error";
 }
-
 ?>
