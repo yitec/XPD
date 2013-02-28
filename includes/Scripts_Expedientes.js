@@ -46,17 +46,19 @@ $(document).ready(function(){
       width: 350,
       modal: false,
       buttons: {
-        "Subir Archivo": function() {                      
-          
-          $( this ).dialog( "close" ); 
-
-        },
+       Finalizar: function() {
+        alert($('#fileupload').val());
+          $( this ).dialog( "close" );
+          guarda_archivo();
+        
+      },        
         Cancelar: function() {
           $( this ).dialog( "close" );
         }
       },
       close: function() {
         allFields.val( "" ).removeClass( "ui-state-error" );
+        
       }
     });
  
@@ -115,10 +117,12 @@ function despliega_archivos(id,numero){
 	});
 }
 
-
-
 /********************************************Subir archivo*****************************************************************/
-
+/**********************************************
+Accion:Sube un archivo al server
+Parametros:nombre del archivo a subir
+Ivocación:Boton upload file.
+/**********************************************/
 $(function () {
     $('#fileupload').fileupload({
         dataType: 'json',
@@ -128,10 +132,17 @@ $(function () {
             data.submit();
         },
         done: function (e, data) {
-          $('#progress').html('Listo');            
+          $('#progress').html('Listo');   
+          var dataJson = eval(data);
+          alert (dataJson.disabled);
+          alert (dataJson.dataType);
+          var dataFile = eval(dataJson.files);
+          alert(dataFile.name);
         }
     });
 });
+
+
 
 
 })// Document ready Final
