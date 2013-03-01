@@ -50,8 +50,7 @@ $(document).ready(function(){
        Finalizar: function() {
         alert($('#fileupload').val());
           $( this ).dialog( "close" );
-          guarda_archivo();
-        
+          guarda_archivo();        
       },        
         Cancelar: function() {
           $( this ).dialog( "close" );
@@ -70,33 +69,13 @@ $(document).ready(function(){
 
     });
   
-/************************************Tool Tip************************************************************/
-$( document ).tooltip({
-      position: {
-        my: "center bottom-20",
-        at: "center top",
-        using: function( position, feedback ) {
-          $( this ).css( position );
-          $( "<div>" )
-            .addClass( "arrow" )
-            .addClass( feedback.vertical )
-            .addClass( feedback.horizontal )
-            .appendTo( this );
-        }
-      }
-});
 
-/************************************Notificaciones Jquery************************************************************/
-function notificacion(titulo,cuerpo,tipo){
-	$.pnotify({
-	pnotify_title: titulo,
-    pnotify_text: cuerpo,
-    pnotify_type: tipo,
-    pnotify_hide: true
-	});	
-}
-
-/************************************Notificaciones Jquery************************************************************/
+/************************************Despliega Archivos************************************************************/
+/**********************************************
+Accion:Despliega el listado de los archivos asignado a un expedientte
+Parametros:id del expediente y numero del expediente
+Ivocación:Boton upload_file y guard_archivo.
+/**********************************************/
 function despliega_archivos(id,numero){
 	var vhtml='';
 	var parametros=id+","+numero;
@@ -106,13 +85,13 @@ function despliega_archivos(id,numero){
 			url: "../operaciones/Clase_Expedientes.php",
 			success: function(datos){ 
 					var dataJson = eval(datos);
-            			$("#contenido").empty();
+            			$("#contenido_archivos").html("");
             			vhtml='<div class="box_contenidos"><table><tr class="subtitulos"><td>Archivo</td><td id="clientes">Fecha Creacion</td><td id="creacion">Fecha Modificacion</td><td id="actualizacion">Operaciones</td></tr>';
             			for(var i in dataJson){
                 			vhtml=vhtml+'<tr><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td></tr>';                	
 	                	}
                 	vhtml=vhtml+'</table></div>';
-					$('#contenido').append(vhtml);
+					$('#contenido_archivos').append(vhtml);
 
 			} 
 	});
@@ -152,19 +131,51 @@ Ivocación:Funcion subir archivo
 /**********************************************/
 function guarda_archivo(){
   var parametros=archivo+","+$("#cmb_tipo").val();
-  $ajax({ data: 'metodo=guarda_archivo&'+parametros.
+  $.ajax({ data: "metodo=guarda_archivo&parametros="+parametros,
     type: "POST",
     dataType: "json",
     url: "../operaciones/Clase_Expedientes.php",
     success: function (data){
+      if (data.resultado>0){
+      despliega_archivos(data.resultado,0);
+    }else{
+      notificacion("Error","Ha sucedido un error","error");
+    }
+
 
     }
 
   }
 
+
   );
 
 
+}
+/************************************Tool Tip************************************************************/
+$( document ).tooltip({
+      position: {
+        my: "center bottom-20",
+        at: "center top",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      }
+});
+
+/************************************Notificaciones Jquery************************************************************/
+function notificacion(titulo,cuerpo,tipo){
+  $.pnotify({
+  pnotify_title: titulo,
+    pnotify_text: cuerpo,
+    pnotify_type: tipo,
+    pnotify_hide: true
+  }); 
 }
 
 

@@ -61,10 +61,17 @@ class Expedientes{
 
 	********************************************************/
 	function guarda_archivo($parametros,$hoy){
+		//eliminar esta linea
+		$_SESSION['id_expediente']=24;		
 		$v_datos=explode(",",$parametros);
 		
-		$result=mysql_query("insert into tbl_archivos (id_expediente,nombre_archivo,fecha_creacion,fecha_modificacion,id_tipo,id_usuario)values('".$session[]."','".$v_datos[1]."','".."','".."','".."',)")
-
+		$result=mysql_query("insert into tbl_archivos (id_expediente,nombre_archivo,fecha_creacion,fecha_modificacion,id_tipo,id_usuario,estado)values('".$_SESSION['id_expediente']."','".$v_datos[0]."','".$hoy."','".$hoy."','".$v_datos[1]."','".$_SESSION['usuario']."','"."1"."')");
+		if (!$result){
+			$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+		}else{
+			$jsondata['resultado'] = $_SESSION['id_expediente'];			
+		}		
+		echo json_encode($jsondata);	
 	}
 
 }

@@ -45,7 +45,7 @@ conectar();
                     </tr>
                     </table>            
                     </div>
-                    <div class="box_contenidos">   
+                    <div id="contenido_archivos" class="box_contenidos">   
                     <table>
                     <tr class="subtitulos">                        
                         <td id="archivo">Archivo</td>
