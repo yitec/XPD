@@ -360,6 +360,12 @@ h2{
   margin-top: 10px;
 }
 
+.resultados{
+ margin-top: 10px;
+ color: #32c01b;
+ font-weight: bold;  
+}
+
 .labels{
   font-size: 14px;
   font-weight: bold;

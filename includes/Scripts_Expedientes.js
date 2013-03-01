@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	var allFields = $( [] ).add( txt_numero );
+  var archivo;
  
 /***************************************Dialog Form Crear Expediente*************************************************************/
     $( "#dialog-form" ).dialog({
@@ -127,22 +128,44 @@ $(function () {
     $('#fileupload').fileupload({
         dataType: 'json',
         add: function (e, data) {
-            $('#progress').html('Subiendo');
+            $('#progress').html('<div class="resultados">Subiendo</div>');
             //data.context = $('<p/>').text('Uploading...').appendTo('progress');
             data.submit();
         },
         done: function (e, data) {
-          $('#progress').html('Listo');   
-          var dataJson = eval(data);
-          alert (dataJson.disabled);
-          alert (dataJson.dataType);
+          
+          var dataJson = eval(data);                    
           var dataFile = eval(dataJson.files);
-          alert(dataFile.name);
+          $('#progress').html('<div class="resultados">Subido'+dataFile[0].name+' </div>');   
+          archivo=dataFile[0].name;
+
         }
     });
 });
 
 
+/********************************************Guarda archivo*****************************************************************/
+/**********************************************
+Accion:Guarda el detalle del archivo en la base de datos
+Parametros:
+Ivocación:Funcion subir archivo
+/**********************************************/
+function guarda_archivo(){
+  var parametros=archivo+","+$("#cmb_tipo").val();
+  $ajax({ data: 'metodo=guarda_archivo&'+parametros.
+    type: "POST",
+    dataType: "json",
+    url: "../operaciones/Clase_Expedientes.php",
+    success: function (data){
+
+    }
+
+  }
+
+  );
+
+
+}
 
 
 })// Document ready Final

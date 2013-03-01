@@ -111,6 +111,10 @@ conectar();
   <p class="validateTips">Seleccione el archivo.</p>
     <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
     <div id="progress"></div>
+    <div class="separacion"><span>Nombre Archivo</span></div>
+    <div class="separacion"><span><input type="text" class="inputbox"></span></div>
+    <div class="separacion"><span>Tipo</span></div>
+    <div class="separacion"><span><select id="cmb_tipo"class="combo"><option value="1">Texto</option><option value="2">Pdf</option><option value="3">video</option></span></div>
   </div>
 
 

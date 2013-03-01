@@ -56,16 +56,14 @@ class Expedientes{
 	}
 
 	/*******************************************************
-	accion="Sube los archivos a la carpeta archivos"
+	accion="guarda los archivos en la base de datos"
 	parametros="nombre del archivo"
 
 	********************************************************/
-	function sube_archivo($parametros,$hoy){
+	function guarda_archivo($parametros,$hoy){
 		$v_datos=explode(",",$parametros);
-		$archivo=$v_datos[0];
-		$destino =  "archivos/".$archivo;
-		if (copy($_FILES['archivo']['tmp_name'],$destino)) {
-		}
+		
+		$result=mysql_query("insert into tbl_archivos (id_expediente,nombre_archivo,fecha_creacion,fecha_modificacion,id_tipo,id_usuario)values('".$session[]."','".$v_datos[1]."','".."','".."','".."',)")
 
 	}
 
