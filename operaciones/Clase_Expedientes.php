@@ -5,7 +5,7 @@ conectar();
 $hoy=date("Y-m-d H:i:s");
 /*****************************************************************************************************************
 Accion:Ejecuta todas las operaciones sobre expedientes
-Parmentros: Vector con lista de parametros segun metodo
+Parametros: Vector con lista de parametros segun metodo
 /****************************************************************************************************************/
 
 $metodo=$_POST['metodo'];
@@ -30,8 +30,14 @@ class Expedientes{
 	}
 
 	function despliega_archivos($parametros,$hoy){
+		//eliminar esta asignacion
+		$_SESSION['id_expediente']=24;		
+		
 		$v_datos=explode(",",$parametros);
 		$id=$v_datos[0];
+		if ($v_datos==0){
+			$id=$_SESSION['id_expediente'];
+		}
 		$numero=$v_datos[1];
 		$result=mysql_query("select * from tbl_archivos where id_expediente='".$id."' ");
 		if (!$result) {//si da error que me despliegue el error del query       		

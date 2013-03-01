@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
 	var allFields = $( [] ).add( txt_numero );
-  boton_subir();
  
 /***************************************Dialog Form Crear Expediente*************************************************************/
     $( "#dialog-form" ).dialog({
@@ -41,27 +40,33 @@ $(document).ready(function(){
     });
 
 /***************************************Dialog Form Crear archivo*************************************************************/
-    $( "#dialog-form-subir" ).dialog({
+    $( "#dialog-form-subir" ).dialog({       
       autoOpen: false,
       height: 350,
       width: 350,
-      modal: true,
+      modal: false,
       buttons: {
-        "Subir Archivo": function() {
-              
+       Finalizar: function() {
+        alert($('#fileupload').val());
           $( this ).dialog( "close" );
-        },
+          guarda_archivo();
+        
+      },        
         Cancelar: function() {
           $( this ).dialog( "close" );
         }
       },
       close: function() {
         allFields.val( "" ).removeClass( "ui-state-error" );
+        
       }
     });
  
     $( "#boton_subir" ).click(function() {
+        
         $( "#dialog-form-subir" ).dialog( "open" );
+        
+
     });
   
 /************************************Tool Tip************************************************************/
@@ -112,32 +117,32 @@ function despliega_archivos(id,numero){
 	});
 }
 
+/********************************************Subir archivo*****************************************************************/
+/**********************************************
+Accion:Sube un archivo al server
+Parametros:nombre del archivo a subir
+Ivocación:Boton upload file.
+/**********************************************/
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        add: function (e, data) {
+            $('#progress').html('Subiendo');
+            //data.context = $('<p/>').text('Uploading...').appendTo('progress');
+            data.submit();
+        },
+        done: function (e, data) {
+          $('#progress').html('Listo');   
+          var dataJson = eval(data);
+          alert (dataJson.disabled);
+          alert (dataJson.dataType);
+          var dataFile = eval(dataJson.files);
+          alert(dataFile.name);
+        }
+    });
+});
 
 
-function boton_subir(){
-  var button = $('#upload_button'), interval;
-  new AjaxUpload('#upload_button', {
-        action: '../upload.php',
-    onSubmit : function(file , ext){
-    if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
-      // extensiones permitidas
-      alert('Error: Solo se permiten imagenes');
-      // cancela upload
-      return false;
-    } else {
-      button.text('Uploading');
-      this.disable();
-    }
-    },
-    onComplete: function(file, response){
-      button.text('Upload');
-      // enable upload button
-      this.enable();      
-      // Agrega archivo a la lista
-      $('#lista').appendTo('.files').text(file);
-    } 
-  });
-}
 
 
 })// Document ready Final
