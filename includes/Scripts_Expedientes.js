@@ -6,12 +6,12 @@ $(document).ready(function(){
 /***************************************Dialog Form Crear Expediente*************************************************************/
     $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 350,
+      height: 450,
       width: 350,
       modal: true,
       buttons: {
         "Crear nuevo expediente": function() {
-        	var parametros=$("#txt_numero").val()+","+$("#cmb_categoria").val();
+        	var parametros=$("#txt_numero").val()+","+$("#cmb_categoria").val()+","+$("#txt_titulo").val()+","+$("#cmb_cliente").val();
         	$.ajax({ data: "metodo=crea_expedientes&parametros="+parametros,
 			type: "POST",
 			dataType: "json",
@@ -48,9 +48,12 @@ $(document).ready(function(){
       modal: false,
       buttons: {
        Finalizar: function() {
-        alert($('#fileupload').val());
+          $('#progress').empty();
+          $('#txt_descripcion').val()="";
           $( this ).dialog( "close" );
           guarda_archivo();        
+
+
       },        
         Cancelar: function() {
           $( this ).dialog( "close" );
@@ -74,7 +77,7 @@ $(document).ready(function(){
 /**********************************************
 Accion:Despliega el listado de los archivos asignado a un expedientte
 Parametros:id del expediente y numero del expediente
-Ivocación:Boton upload_file y guard_archivo.
+Ivocación:Boton upload_file y guard_archivo busca_archivos.
 /**********************************************/
 function despliega_archivos(id,numero){
 	var vhtml='';
@@ -86,15 +89,53 @@ function despliega_archivos(id,numero){
 			success: function(datos){ 
 					var dataJson = eval(datos);
             			$("#contenido_archivos").html("");
-            			vhtml='<div class="box_contenidos"><table><tr class="subtitulos"><td>Archivo</td><td id="clientes">Fecha Creacion</td><td id="creacion">Fecha Modificacion</td><td id="actualizacion">Operaciones</td></tr>';
+            			vhtml='<div><table><tr class="subtitulos"><td>Descripcion</td><td>Archivo</td><td id="clientes">Fecha Creacion</td><td id="creacion">Fecha Modificacion</td><td id="actualizacion">Operaciones</td></tr>';
             			for(var i in dataJson){
-                			vhtml=vhtml+'<tr><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td></tr>';                	
+                			vhtml=vhtml+'<tr><td>'+dataJson[i].descripcion+'</td><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td></tr>';                	
 	                	}
                 	vhtml=vhtml+'</table></div>';
 					$('#contenido_archivos').append(vhtml);
 
 			} 
 	});
+}
+
+
+/************************************Despliega header************************************************************/
+/**********************************************
+Accion:Despliega el header de un expediente (Numero-Nombre etc)
+Parametros:datos del header
+Ivocación:Buscar expediente
+/**********************************************/
+function despliega_header(numero,nombre,creacion,modificacion,estado){
+  var vhtml="";
+  if(estado==1){
+    var est="Activo";
+  }else{
+    var est="Desactivado";
+  }
+  $("#header_expediente").html("");
+  vhtml='<table><tr class="subtitulos"><td width="200">Expediente</td><td id="clientes">Cliente</td><td id="creacion">Fecha Creación</td><td id="actualizacion">Ultima Actualización</td><td id="status">Status</td></tr><tr><td>'+numero+'</td><td>'+nombre+'</td><td>'+creacion+'</td><td>'+modificacion+'</td><td>'+est+'</td></tr></table>';
+  $('#header_expediente').append(vhtml);
+}
+
+
+/************************************Despliega Numeros************************************************************/
+/**********************************************
+Accion:Despliega los numeros de expedientes pertenecientes a un cliente
+Parametros:datos de los numeros
+Ivocación:Buscar expediente
+/**********************************************/
+function despliega_numeros(data){
+  var vhtml="";
+  var dataJson = eval(data);
+  $("#header_expediente").html("");
+  vhtml='<table><tr class="subtitulos"><td width="200">Expediente</td><td>Titulo</td><td>Ver</td></tr>';
+  for(var i in dataJson){
+    vhtml=vhtml+'<tr><td>'+dataJson[i].numero+'</td><td>'+dataJson[i].titulo+'</td><td><img src="img/search.png" class="numeros_buscar" id="'+dataJson[i].numero+'"></td>';
+  }
+  vhtml=vhtml+'<table>';
+  $('#header_expediente').append(vhtml);
 }
 
 /********************************************Subir archivo*****************************************************************/
@@ -130,7 +171,7 @@ Parametros:
 Ivocación:Funcion subir archivo
 /**********************************************/
 function guarda_archivo(){
-  var parametros=archivo+","+$("#cmb_tipo").val();
+  var parametros=archivo+","+$("#cmb_tipo").val()+","+$("#txt_descripcion").val();
   $.ajax({ data: "metodo=guarda_archivo&parametros="+parametros,
     type: "POST",
     dataType: "json",
@@ -145,13 +186,39 @@ function guarda_archivo(){
 
     }
 
-  }
-
-
-  );
+  });
 
 
 }
+
+/********************************************Buscar expediente*****************************************************************/
+/**********************************************
+Accion:Busca un expediente por numero o nombre
+Parametros:datos del input txt_buscar
+Ivocación:click img_biscar
+/**********************************************/
+
+$('#btn_buscar').click(function(){
+    var parametros=$("#txt_buscar").val()+",";
+    $.ajax({ 
+    data: "metodo=busca_expediente&parametros="+parametros,
+    type: "POST",
+    dataType: "json",
+    url: "../operaciones/Clase_Expedientes.php",
+    success: function (data){
+      if (data.id_expediente>0){
+        despliega_header(data.numero_expediente,data.nombre_cliente,data.fecha_creacion,data.fecha_modificacion,data.estado);
+        despliega_archivos(data.id_expediente,0);
+      }else
+      {
+        despliega_numeros(data);
+      }      
+    }
+    });
+
+});
+
+
 /************************************Tool Tip************************************************************/
 $( document ).tooltip({
       position: {
