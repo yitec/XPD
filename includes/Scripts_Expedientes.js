@@ -2,6 +2,24 @@ $(document).ready(function(){
 
 	var allFields = $( [] ).add( txt_numero );
   var archivo;
+
+//**********************************cargo el vector de usuarios ****************************************************************/
+var availableTags;
+    $.ajax({ data: "metodo=autocompleta_clientes",
+        type: "POST",
+        async: false,
+        url: "../operaciones/Clase_Expedientes.php",        
+        success: function(data){     
+          availableTags =data;      
+        }//end succces function
+    });//end ajax function  
+    availableTags=availableTags.split(",");
+    $( "#txt_buscar" ).autocomplete({
+      source: availableTags
+    });
+
+
+
  
 /***************************************Dialog Form Crear Expediente*************************************************************/
     $( "#dialog-form" ).dialog({
@@ -21,7 +39,8 @@ $(document).ready(function(){
 					notificacion("Error","El expediente ya existe o ha sucedido un error","error");					
 				}else{
 					notificacion("Nuevo Expediente","El Expediente fue guardado exitosamente.","info");
-					despliega_archivos(data.ultimo_id,data.numero_expediente);
+          despliega_header(data.numero_expediente,data.nombre_cliente,data.fecha_creacion,data.fecha_modificacion,data.estado);
+					//despliega_archivos(data.ultimo_id,data.numero_expediente);
 				}				
 			} 
 			});
@@ -43,13 +62,13 @@ $(document).ready(function(){
 /***************************************Dialog Form Crear archivo*************************************************************/
     $( "#dialog-form-subir" ).dialog({       
       autoOpen: false,
-      height: 350,
+      height: 450,
       width: 350,
       modal: false,
       buttons: {
        Finalizar: function() {
-          $('#progress').empty();
-          $('#txt_descripcion').val()="";
+          //$('#txt_descripcion').val()='';
+          $('#progress').empty();          
           $( this ).dialog( "close" );
           guarda_archivo();        
 
@@ -71,6 +90,38 @@ $(document).ready(function(){
         
 
     });
+
+
+
+/************************************Despliega los archivos de un una lupa seleccionada************************************************************/
+/**********************************************
+Accion:Despliega el listado de los archivos asignado a un expedientte
+Parametros:id del expediente y numero del expediente
+Ivocación:Boton upload_file y guard_archivo busca_archivos.
+/**********************************************/
+$(document).on("click", "img.buscar_numeros", function(){ 
+  alert($(this).attr("numero_expediente")); 
+});
+/*$("p.buscar_numeros").on({
+  click: function(){
+    alert("entro");
+  }});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 /************************************Despliega Archivos************************************************************/
@@ -132,7 +183,7 @@ function despliega_numeros(data){
   $("#header_expediente").html("");
   vhtml='<table><tr class="subtitulos"><td width="200">Expediente</td><td>Titulo</td><td>Ver</td></tr>';
   for(var i in dataJson){
-    vhtml=vhtml+'<tr><td>'+dataJson[i].numero+'</td><td>'+dataJson[i].titulo+'</td><td><img src="img/search.png" class="numeros_buscar" id="'+dataJson[i].numero+'"></td>';
+    vhtml=vhtml+'<tr><td>'+dataJson[i].numero+'</td><td>'+dataJson[i].titulo+'</td><td><img src="img/search.png" class="buscar_numeros" numero_expediente="'+dataJson[i].numero+'"></td>';
   }
   vhtml=vhtml+'<table>';
   $('#header_expediente').append(vhtml);

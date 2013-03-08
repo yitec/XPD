@@ -24,7 +24,7 @@ conectar();
                 <div class="sub_header">
                     <span id="add"><img src="img/add.png" id="boton_add" title="Crear un expediente."></span>
                     <span id="boton_subir"><input  value="Subir Archivo" title="Subir Archivo."  name="submit" id="boton_subir" type="image"  src="img/upload.png" /></span>
-                    <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" id="txt_buscar" title="Buscar un expediente." value="" /></span>                    
+                    <span id="search" class="ui-widget"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" id="txt_buscar" title="Buscar un expediente." value="" /></span>                    
                     <span id="search_icon"><img  id="btn_buscar"src="img/search.png"></span>                    
                 </div>                
                     <div id="header_expediente" class="box_contenidos">   
@@ -36,7 +36,7 @@ conectar();
                     
                     
              
-                <div class="sub_footer">Seleccione una opción</div>                
+                <div class="sub_footer"><p class="buscar_numeros">Seleccione una opción</p></div>                
 			</div>
 <!-- ---------------------------------------------Ventana Modal Crear Expediente-------------------------------------------------------- -->
 <div id="dialog-form" title="Crear nuevo expediente">
@@ -52,7 +52,7 @@ conectar();
     <?
     $result=mysql_query("select * from tbl_clientes where estado=1");
     while($row=mysql_fetch_object($result)){
-        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
+        echo '<option value="'.$row->id.'">'.utf8_encode($row->nombre).'</option>';
     }
     ?>
     </select>
@@ -63,7 +63,7 @@ conectar();
     <?
     $result=mysql_query("select * from tbl_catExpedientes where estado=1");
     while($row=mysql_fetch_object($result)){
-        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
+        echo '<option value="'.$row->id.'">'.utf8_encode($row->nombre).'</option>';
     }
     ?>
     </select>
@@ -80,7 +80,7 @@ conectar();
     <div class="separacion"><span>Descripci&oacute;n Archivo</span></div>
     <div class="separacion"><span><input type="text" id="txt_descripcion" class="inputbox"></span></div>
     <div class="separacion"><span>Tipo</span></div>
-    <div class="separacion"><span><select id="cmb_tipo"class="combo"><option value="1">Texto</option><option value="2">Pdf</option><option value="3">video</option></span></div>
+    <div class="separacion"><span><select id="cmb_tipo"class="combo"><option value="1">Texto</option><option value="2">Pdf</option><option value="3">video</option><option value="4">Imagen</option></span></div>
   </div>
 
 
