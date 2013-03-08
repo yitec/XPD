@@ -9,7 +9,7 @@ conectar();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel ="stylesheet" href="css/general.css" type="text/css" />
-        <link rel ="stylesheet" href="css/expedientes.css" type="text/css" />
+        <link rel ="stylesheet" href="css/cobros.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' type='text/css' />
         <link rel="stylesheet" href="includes/themes/base/jquery-ui-1.10.0.custom.css" />
