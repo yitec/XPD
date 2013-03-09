@@ -1,0 +1,47 @@
+#expedientes{
+	width: 100px;	
+}
+
+#clientes{	
+	width: 200px;	
+}
+
+#creacion{
+	width: 150px;	
+}
+
+#actualizacion{
+	width: 200px;	
+}
+
+#status{
+	width: 100px;	
+}
+#archivo{
+	width: 400px;	
+}
+#acciones{
+	width: 90px;	
+}
+.iconos{
+	margin-left: 10px;
+}
+table{
+	width: 100%;
+}
+/* Zebra striping */
+tr:nth-child(2n+1) { 
+	background: #eef1ed; 
+}
+
+#boton_subir { 	
+	vertical-align: 15px;
+	margin-left: 10px;	
+}
+
+input.subir:hover { 		
+    -webkit-box-shadow: 0px 0px 10px #555;
+    -moz-box-shadow: 0px 0px 10px #aaa; 
+    box-shadow: 0px 0px 10px #555;		
+    cursor:  pointer; 
+}
