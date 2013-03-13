@@ -19,8 +19,6 @@ var availableTags;
     });
 
 
-
- 
 /***************************************Dialog Form Crear Expediente*************************************************************/
     $( "#dialog-form" ).dialog({
       autoOpen: false,
