@@ -9,7 +9,7 @@ conectar();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel ="stylesheet" href="css/general.css" type="text/css" />
-        <link rel ="stylesheet" href="css/cobros.css" type="text/css" />
+        <link rel ="stylesheet" href="css/expedientes.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' type='text/css' />
         <link rel="stylesheet" href="includes/themes/base/jquery-ui-1.10.0.custom.css" />
@@ -22,17 +22,15 @@ conectar();
             <?include ('menu_superior.php');?>
     		<div class="box_mprincipal">
                 <div class="sub_header">
-                    <span id="add"><img src="img/add.png" id="boton_add" title="Crear un expediente."></span>
+                    <span id="add" ><img class="pointer" src="img/add.png" id="boton_add" title="Crear un expediente."></span>
                     <span id="boton_subir"><input  value="Subir Archivo" title="Subir Archivo."  name="submit" id="boton_subir" type="image"  src="img/upload.png" /></span>
                     <span id="search" class="ui-widget"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" id="txt_buscar" title="Buscar un expediente." value="" /></span>                    
-                    <span id="search_icon"><img  id="btn_buscar"src="img/search.png"></span>                    
+                    <span id="search_icon"><img class="pointer"  id="btn_buscar"src="img/search.png"></span>                    
                 </div>                
-                    <div id="header_expediente" class="box_contenidos">   
+                    <div  class="box_contenidos">   
                     
                     </div>
-                    <div id="contenido_archivos" class="box_contenidos">   
                     
-                    </div>
                     
                     
              

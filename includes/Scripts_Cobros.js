@@ -79,9 +79,9 @@ var parametros=$('#cmb_cliente').val()+",";
     });
 
 /***************************************Dialog Form Crear archivo*************************************************************/
-    $( "#dialog-form-subir" ).dialog({       
+    $( "#dialog-form-pagar" ).dialog({       
       autoOpen: false,
-      height: 450,
+      height: 200,
       width: 350,
       modal: false,
       buttons: {
@@ -89,7 +89,7 @@ var parametros=$('#cmb_cliente').val()+",";
           //$('#txt_descripcion').val()='';
           $('#progress').empty();          
           $( this ).dialog( "close" );
-          guarda_archivo();        
+          guarda_pago();        
 
 
       },        
@@ -103,9 +103,9 @@ var parametros=$('#cmb_cliente').val()+",";
       }
     });
  
-    $( "#boton_subir" ).click(function() {
+    $(document).on("click", "a.pagar_cobros", function(){ 
         
-        $( "#dialog-form-subir" ).dialog( "open" );
+        $( "#dialog-form-pagar" ).dialog( "open" );
         
 
     });
@@ -143,7 +143,7 @@ function despliega_cobros(id,numero){
       var dataJson = eval(data);          
       vhtml='<div id="header_expediente"> <table><tr class="subtitulos"><td width="200">Monto</td><td>Concepto</td><td>Fecha Creación</td><td>Fecha Pago</td><td>Operaciones</td></tr>';
       for(var i in dataJson){
-        vhtml=vhtml+'<tr><td>'+dataJson[i].monto+'</td><td>'+dataJson[i].concepto+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_pago+'</td><td><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/pagar.png" title="Pagar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td>';
+        vhtml=vhtml+'<tr><td>'+dataJson[i].monto+'</td><td>'+dataJson[i].concepto+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_pago+'</td><td><img src="img/edit_icon.png" title="Editar"><a class="pagar_cobros" id="'+dataJson[i].id+'" id_expediente="'+dataJson[i].id_expediente+'"><img  class="iconos" src="img/pagar.png" title="Pagar"></a><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td>';
       }
       vhtml=vhtml+'<table></div>';
       $('.box_contenidos').append(vhtml);

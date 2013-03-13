@@ -39,8 +39,8 @@ var availableTags;
 					notificacion("Error","El expediente ya existe o ha sucedido un error","error");					
 				}else{
 					notificacion("Nuevo Expediente","El Expediente fue guardado exitosamente.","info");
-          despliega_header(data.numero_expediente,data.nombre_cliente,data.fecha_creacion,data.fecha_modificacion,data.estado);
-					//despliega_archivos(data.ultimo_id,data.numero_expediente);
+        despliega_header_expediente(data.id_expediente,data.numero_expediente);
+        despliega_archivos(data.id_expediente,0);
 				}				
 			} 
 			});
@@ -100,29 +100,42 @@ Parametros:id del expediente y numero del expediente
 Ivocación:Boton upload_file y guard_archivo busca_archivos.
 /**********************************************/
 $(document).on("click", "img.buscar_numeros", function(){ 
-  alert($(this).attr("numero_expediente")); 
+  despliega_header_expediente($(this).attr("id_expediente"),$(this).attr("numero_expediente"));
+  despliega_archivos($(this).attr("id_expediente"),$(this).attr("numero_expediente"));
 });
-/*$("p.buscar_numeros").on({
-  click: function(){
-    alert("entro");
-  }});*/
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/************************************Despliega header expediente************************************************************/
+/**********************************************
+Accion:Despliega el header de un expediente (Numero-Nombre etc)
+Parametros:datos del header
+Ivocación:Buscar expediente
+/**********************************************/
+function despliega_header_expediente(id,numero){
+    var parametros=id+","+numero;
+    $.ajax({ 
+    data: "metodo=busca_header_expediente&parametros="+parametros,
+    type: "POST",
+    dataType: "json",
+    url: "../operaciones/Clase_Expedientes.php",
+    success: function (data){
+        var vhtml="";
+        if(data.estado==1){
+          var est="Activo";
+        }else{
+          var est="Desactivado";
+        }
+        $('.box_contenidos').empty();
+        vhtml='<div><table><tr class="subtitulos"><td width="200">Expediente</td><td id="clientes">Cliente</td><td id="creacion">Fecha Creación</td><td id="actualizacion">Ultima Actualización</td><td id="status">Status</td></tr><tr><td>'+data.numero_expediente+'</td><td>'+data.nombre_cliente+'</td><td>'+data.fecha_creacion+'</td><td>'+data.fecha_modificacion+'</td><td>'+est+'</td></tr></table><br></div>';
+        $('.box_contenidos').append(vhtml);
+    }
+  });
 
   
+}
+
+
 
 /************************************Despliega Archivos************************************************************/
 /**********************************************
@@ -137,38 +150,44 @@ function despliega_archivos(id,numero){
 			type: "POST",
 			dataType: "json",
 			url: "../operaciones/Clase_Expedientes.php",
-			success: function(datos){ 
-					var dataJson = eval(datos);
-            			$("#contenido_archivos").html("");
-            			vhtml='<div><table><tr class="subtitulos"><td>Descripcion</td><td>Archivo</td><td id="clientes">Fecha Creacion</td><td id="creacion">Fecha Modificacion</td><td id="actualizacion">Operaciones</td></tr>';
+			success: function(data){ 
+					var dataJson = eval(data);
+            			
+            			vhtml='<div><table><tr class="subtitulos"><td width="210">Descripcion</td><td width="210">Archivo</td><td width="150">Fecha Creación</td><td width="150">Fecha Modificación</td><td width="100">Operaciones</td></tr>';
             			for(var i in dataJson){
-                			vhtml=vhtml+'<tr><td>'+dataJson[i].descripcion+'</td><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><img src="img/edit_icon.png" title="Editar"><img  class="iconos" src="img/download_icon.png" title="Descargar"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td></tr>';                	
+                			vhtml=vhtml+'<tr><td>'+dataJson[i].descripcion+'</td><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><a target="_blank" href="../server/php/files/'+dataJson[i].nombre_archivo+'"><img  class="iconos" src="img/download_icon.png" title="Descargar"></a><a class="eliminar" file="'+dataJson[i].nombre_archivo+'" id_archivo="'+dataJson[i].id+'" id_expediente="'+id+'" numero_expediente="'+numero+'"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></a></td></tr>';                	
 	                	}
                 	vhtml=vhtml+'</table></div>';
-					$('#contenido_archivos').append(vhtml);
+					$('.box_contenidos').append(vhtml);
 
 			} 
 	});
 }
 
-
-/************************************Despliega header************************************************************/
+/************************************Eliminar Archivos************************************************************/
 /**********************************************
-Accion:Despliega el header de un expediente (Numero-Nombre etc)
-Parametros:datos del header
-Ivocación:Buscar expediente
+Accion:Despliega el listado de los archivos asignado a un expedientte
+Parametros:id del expediente y numero del expediente
+Ivocación:Boton upload_file y guard_archivo busca_archivos.
 /**********************************************/
-function despliega_header(numero,nombre,creacion,modificacion,estado){
-  var vhtml="";
-  if(estado==1){
-    var est="Activo";
-  }else{
-    var est="Desactivado";
-  }
-  $("#header_expediente").html("");
-  vhtml='<table><tr class="subtitulos"><td width="200">Expediente</td><td id="clientes">Cliente</td><td id="creacion">Fecha Creación</td><td id="actualizacion">Ultima Actualización</td><td id="status">Status</td></tr><tr><td>'+numero+'</td><td>'+nombre+'</td><td>'+creacion+'</td><td>'+modificacion+'</td><td>'+est+'</td></tr></table>';
-  $('#header_expediente').append(vhtml);
-}
+$(document).on("click", "a.eliminar", function(){ 
+  var vhtml='';
+  var parametros=$(this).attr("file")+","+$(this).attr("id_archivo");
+  $.ajax({ data: "metodo=elimina_archivos&parametros="+parametros,
+      type: "POST",
+      dataType: "json",
+      url: "../operaciones/Clase_Expedientes.php",
+      success: function(data){ 
+          if (data.resultado=="Succes"){
+            alert ("eliminado");
+          }
+
+      } 
+  });
+    despliega_header_expediente($(this).attr("id_expediente"),$(this).attr("numero_expediente"));
+  despliega_archivos($(this).attr("id_expediente"),$(this).attr("numero_expediente"));
+});
+
 
 
 /************************************Despliega Numeros************************************************************/
@@ -180,13 +199,13 @@ Ivocación:Buscar expediente
 function despliega_numeros(data){
   var vhtml="";
   var dataJson = eval(data);
-  $("#header_expediente").html("");
+  $(".box_contenidos").empty();
   vhtml='<table><tr class="subtitulos"><td width="200">Expediente</td><td>Titulo</td><td>Ver</td></tr>';
   for(var i in dataJson){
-    vhtml=vhtml+'<tr><td>'+dataJson[i].numero+'</td><td>'+dataJson[i].titulo+'</td><td><img src="img/search.png" class="buscar_numeros" numero_expediente="'+dataJson[i].numero+'"></td>';
+    vhtml=vhtml+'<tr><td>'+dataJson[i].numero+'</td><td>'+dataJson[i].titulo+'</td><td><img src="img/search.png" class="buscar_numeros" id_expediente="'+dataJson[i].id_expediente+'" numero_expediente="'+dataJson[i].numero+'"></td>';
   }
   vhtml=vhtml+'<table>';
-  $('#header_expediente').append(vhtml);
+  $('.box_contenidos').append(vhtml);
 }
 
 /********************************************Subir archivo*****************************************************************/
@@ -229,7 +248,9 @@ function guarda_archivo(){
     url: "../operaciones/Clase_Expedientes.php",
     success: function (data){
       if (data.resultado>0){
-      despliega_archivos(data.resultado,0);
+      //despliega_archivos(data.resultado,0);
+        despliega_header_expediente(data.resultado,0);
+        despliega_archivos(data.resultado,0);
     }else{
       notificacion("Error","Ha sucedido un error","error");
     }
@@ -258,7 +279,7 @@ $('#btn_buscar').click(function(){
     url: "../operaciones/Clase_Expedientes.php",
     success: function (data){
       if (data.id_expediente>0){
-        despliega_header(data.numero_expediente,data.nombre_cliente,data.fecha_creacion,data.fecha_modificacion,data.estado);
+        despliega_header_expediente(data.id_expediente,data.numero_expediente);
         despliega_archivos(data.id_expediente,0);
       }else
       {

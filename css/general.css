@@ -165,9 +165,6 @@ input.submit {
 }
 
 input.submit:hover { 		
-    -webkit-box-shadow: 0px 0px 10px #555;
-    -moz-box-shadow: 0px 0px 10px #aaa; 
-    box-shadow: 0px 0px 10px #555;		
     cursor:  pointer; 
 }
 

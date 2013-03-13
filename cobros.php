@@ -9,7 +9,7 @@ conectar();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel ="stylesheet" href="css/general.css" type="text/css" />
-        <link rel ="stylesheet" href="css/expedientes.css" type="text/css" />
+        <link rel ="stylesheet" href="css/cobros.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="includes/themes/base/jquery-ui-1.10.0.custom.css" />
@@ -21,9 +21,9 @@ conectar();
             <?include ('menu_superior.php');?>
     		<div class="box_mprincipal">
                 <div class="sub_header">
-                    <span id="add"><img src="img/add.png" id="boton_add" title="Crear un cobro."></span>
+                    <span id="add"><img class="pointer" src="img/add.png" id="boton_add" title="Crear un cobro."></span>
                     <span id="search" class="ui-widget"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" id="txt_buscar" title="Buscar un expediente." value="" /></span>                    
-                    <span id="search_icon"><img  src="img/search.png" id="btn_buscar"></span>                    
+                    <span id="search_icon"><img class="pointer"  src="img/search.png" id="btn_buscar"></span>                    
                 </div>                
                     <div class="box_contenidos">   
                     <table>
@@ -77,6 +77,26 @@ conectar();
             <div class="separacion"><input type="text" name="txt_concepto" id="txt_concepto" class="inputbox_peq" /></div>
             <div class="separacion"><label for="monto" class="labels">Monto</label></div>
             <div class="separacion"><input type="text" name="txt_monto" id="txt_monto" class="inputbox_peq" /></div>                
+
+        </fieldset>
+        </form>
+        </div>        
+        <div id="dialog-form-pagar" title="Pagar cobro">
+        <form>
+        <fieldset>
+            <div class="separacion"><label for="Tipo pago" class="labels">Tipo Pago</label></div>
+            <div class="separacion">
+            <select name="cmb_tipoPago" id="cmb_tipoPago">
+                <option selected="selected">Seleccione</option>
+            <?
+            $result=mysql_query("select * from tbl_tipopago where estado=1  order by nombre");
+            while($row=mysql_fetch_object($result)){
+                echo '<option value="'.$row->id.'">'.utf8_encode($row->nombre).'</option>';
+            }
+            ?>
+            </select>
+            </div>    
+            
 
         </fieldset>
         </form>

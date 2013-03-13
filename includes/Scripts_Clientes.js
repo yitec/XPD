@@ -34,16 +34,14 @@ $("#btn_guardar").click(function(event){
     $.ajax({
         data: "metodo=crea_cliente&parametros="+parametros,
         type: "POST",
-        async: false,
+        dataType: "json",        
         url: "operaciones/Clase_Clientes.php",
                    
-    success: function(data){
-
-
+    success: function(data){     
     if (data.resultado=="Success"){
         notificacion("Nuevo cliente creado","El cliente fue creado!!","info");          
     }else{
-        notificacion("Error","Intente de nuevoo","error");                
+        notificacion("Error","Intente de nuevo","error");                
     }
         
         
@@ -76,8 +74,18 @@ limpiar();
 
 
 
-
-
+/***************************************Limpiar todos los campos***************************************/
+function limpiar(){
+      $('#txt_nombre').attr('value','');
+      $('#txt_cedula').attr('value','');
+      $('#txt_correo').attr('value','');
+      $('#txt_tel_cel').attr('value','');
+      $('#txt_tel_fijo').attr('value','');
+      $('#txt_fax').attr('value','');
+      $('#txt_direccion').attr('value','');      
+      $('#txt_usuario_buscar').attr('value','');            
+      $('#opcion').attr('value','1'); 
+}
 
 
 

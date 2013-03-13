@@ -5,9 +5,23 @@
     margin-right: auto;
     padding: 40px;     
     width: 440px;
-    background: #d3d1d2;
+    background: #e5e6e5	;
     border: 10px solid #fff; 
 }
 .centrado{
-	margin-left: 50px;
+	margin-left: 80px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.cnt_superior{
+	margin-top: -50px;
+	margin-left: 80px;
+}
+.subtitulos{
+	margin-left: 60px,
+	font-weight: bold;
+	font-size: 20px;
+}
+.resultados{
+	font-size: 18px;
 }

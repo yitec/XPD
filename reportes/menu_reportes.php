@@ -26,7 +26,7 @@ conectar();
                     $result=mysql_query("select * from tbl_reportes where estado='"."1"."'");
                     while($row=mysql_fetch_assoc($result)){
                     if(in_array($row['id'],$_SESSION['reportes'])){    
-                            echo '<div class="centrado"><img src="../img/flecha.png"><a href="'.$row['link'].'" target="_blank">'.utf8_encode($row['nombre']).'</a></div>';
+                            echo '<div class="centrado"><img src="../img/flecha.png"><a href="'.$row['link'].'" target="_blank"><p class="cnt_superior">'.utf8_encode($row['nombre']).'</p></a></div>';
                     }
                     }//end while
                     ?>

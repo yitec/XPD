@@ -35,6 +35,7 @@ class Expedientes{
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
         	$id_expediente=mysql_insert_id();
+        	$jsondata['id_expediente'] = mysql_insert_id();
         	$jsondata['resultado'] = "Success";        	
         	$jsondata['numero_expediente'] = $v_datos[0];         	
         	$jsondata['id_tipoExpediente']=$tipo;
@@ -49,6 +50,34 @@ class Expedientes{
         }
         echo json_encode($jsondata);		
 	}
+
+
+	/*******************************************************
+	accion="elimina los archivos de un expediente"
+	parametros="nobre del archivo"
+
+	********************************************************/
+
+	function elimina_archivos($parametros) {
+		$v_datos=explode(",",$parametros);		
+		$dir="../server/php/files/".$v_datos[0];
+    	chown($dir,666); 
+		unlink($dir);
+		$result=mysql_query("delete from tbl_archivos where id='".$v_datos[1]."'");
+		if (!$result){
+			$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+		}else{
+			$jsondata['resultado'] = "Success";			
+		}		
+		echo json_encode($jsondata);
+	}
+
+
+	/*******************************************************
+	accion="despliega los archivos de un expediente"
+	parametros="id y nombre del expediente"
+
+	********************************************************/
 
 	function despliega_archivos($parametros,$hoy){
 		
@@ -96,6 +125,36 @@ class Expedientes{
 	}
 
 	/*******************************************************
+	accion="busca el header de un expediente"
+	parametros="nombre del valor a buscar"
+
+	********************************************************/
+	function busca_header_expediente($parametros,$hoy){
+		
+				
+		$v_datos=explode(",",$parametros);
+		//busco si lo que me estan dando es un numero de expediente
+		$result=mysql_query("select e.id,e.numero,e.id_tipoExpediente,e.fecha_creacion, e.fecha_modificacion,e.id_cliente,e.estado,c.nombre from tbl_expedientes e,tbl_clientes c where e.id='".$v_datos[0]."' and c.id=e.id_cliente");
+		if (mysql_num_rows($result)>0){
+			$row=mysql_fetch_object($result);
+			$_SESSION['id_expediente']=$row->id;
+			$jsondata['id_expediente']=$row->id;
+			$jsondata['numero_expediente']=$row->numero;
+			$jsondata['id_tipoExpediente']=$row->id_tipoExpediente;
+			$jsondata['fecha_creacion']=$row->fecha_creacion;
+			$jsondata['fecha_modificacion']=$row->fecha_modificacion;
+			$jsondata['id_cliente']=$row->id_cliente;
+			$jsondata['nombre_cliente']=utf8_encode($row->nombre);
+			$jsondata['estado']=$row->estado;
+			$jsondata['resultado']="Success";
+			echo json_encode($jsondata);
+		}else{
+			$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+			echo json_encode($jsondata);
+		}
+	}	
+
+	/*******************************************************
 	accion="busca un expediente"
 	parametros="nombre del valor a buscar"
 
@@ -124,9 +183,9 @@ class Expedientes{
 			$result=mysql_query("select id from tbl_clientes where nombre='".utf8_decode($v_datos[0])."'");
 			if (mysql_num_rows($result)>0){
 				$row=mysql_fetch_object($result);
-				$result2=mysql_query("select numero,titulo from tbl_expedientes where id_cliente='".$row->id."'");
+				$result2=mysql_query("select id,numero,titulo from tbl_expedientes where id_cliente='".$row->id."'");
 				while ($r1=mysql_fetch_object($result2)) {
-					$arr[] = array('id' => $r1->id,
+					$arr[] = array('id_expediente' => $r1->id,
 								'numero' => $r1->numero,
 								'titulo' => utf8_encode($r1->titulo),
                    	);					

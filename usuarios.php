@@ -20,8 +20,8 @@ conectar();
             <?include ('menu_superior.php');?>
     		<div class="box_mprincipal">
                 <div class="sub_header">
-                    <span id="add"><a href="add.php"><img src="img/add.png" title="Crear un cliente"></a></span>
-                    <span id="search"><label for="buscar">Buscar:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar"  title="Buscar un usuario." value="" /></span>                    
+                    <span id="add"></span>
+                    <span id="search" class="ui-widget"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" id="txt_buscar" title="Buscar un usuario." value="" /></span>
                     <span id="search_icon"><img  src="img/search.png"></span>                    
                 </div> 
                     <h2>Usuarios</h2>               
@@ -45,7 +45,7 @@ conectar();
                         <tr>
                             <td class="Arial14Negro"><input name="txt_usuario" id="txt_usuario" class="inputbox" type="text" /></td>
                             <td class="Arial14Negro"><input name="txt_pass" id="txt_pass" class="inputbox" type="password" /></td>        
-                            <td class="Arial14Negro"><input name="txt_fecha" id="txt_fecha" class="inputbox" type="text" /><img src="img_calendar/cal.gif" onClick="javascript:NewCssCal('txt_fecha')" style="cursor:pointer"/></td>        
+                            <td class="Arial14Negro"><input name="txt_fecha" id="txt_fecha" class="inputbox" type="text" /></td>        
                         </tr>    
                         </table>                    
                     </div>
@@ -87,11 +87,16 @@ conectar();
                        </tr>                        
                         </table>                        
                     </div>
+                    <div align="center"><input type="hidden" id="opcion" name="opcion" value="1"><input type="submit" value="Guardar" id="btn_guardar" name="submit" class="submit" /></div>
                 <div class="sub_footer">Seleccione una opción</div>                
 			</div>		
     </body>
-<script type="text/javascript" src="includes/jquery-1.9.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>    
-<script src="includes/expedientes.js"></script>    
+<script src="includes/jquery-1.9.0.min.js"type="text/javascript" ></script>   
+<script src="includes/ui/jquery-ui.js"></script> 
+<script src="includes/Scripts_Usuarios.js"type="text/javascript" ></script>
+<script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
+<script src="includes/vendor/jquery.ui.widget.js"></script>
+<script src="includes/jquery.iframe-transport.js"></script>
+<script src="includes/jquery.fileupload.js"></script>
 </html>
 
