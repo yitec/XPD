@@ -48,7 +48,7 @@ class Expedientes{
                    				'fecha_creacion' => $row->fecha_creacion,
                    				'fecha_pago' => $row->fecha_pago,
                    				'id_tipoPago' => $row->id_tipoPago,
-                   				'id_estado' => $row->estado,
+                   				'estado' => $row->estado,
         		);
 			}	
 		echo json_encode($arr);
@@ -85,6 +85,40 @@ class Expedientes{
 			echo json_encode($jsondata);
 		}
 	}	
+
+	/*******************************************************
+	accion="guarda el pago de un cobro"
+	parametros="id del cobro  a cambiar"
+
+	********************************************************/
+	function guardar_pago($parametros,$hoy){					
+		$v_datos=explode(",",$parametros);
+		//busco si lo que me estan dando es un numero de expediente
+		$result=mysql_query("update tbl_cobros set fecha_pago='".$hoy."', estado=1 where id='".$v_datos[0]."'");
+		if (!$result) {//si da error que me despliegue el error del query       		
+       		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+        }else{
+        	$jsondata['resultado'] = "Success";        	
+        }
+			echo json_encode($jsondata);		
+	}
+
+	/*******************************************************
+	accion="modificar un cobro"
+	parametros="id del cobro  a cambiar"
+
+	********************************************************/
+	function modificar_cobro($parametros,$hoy){					
+		$v_datos=explode(",",$parametros);
+		//busco si lo que me estan dando es un numero de expediente
+		$result=mysql_query("update tbl_cobros set monto='".$v_datos[1]."' where id='".$v_datos[0]."'");
+		if (!$result) {//si da error que me despliegue el error del query       		
+       		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+        }else{
+        	$jsondata['resultado'] = "Success";        	
+        }
+			echo json_encode($jsondata);		
+	}		
 
 	/*******************************************************
 	accion="busca un todos los numerod de expediente pertenecientes a un cliente"

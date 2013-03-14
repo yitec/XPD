@@ -81,7 +81,8 @@ conectar();
         </fieldset>
         </form>
         </div>        
-        <div id="dialog-form-pagar" title="Pagar cobro">
+        <!-- ---------------------------------------------Ventana Modal Pagar Cobros-------------------------------------------------------- -->
+        <div id="dialog-form-pagar" id_cobro="" title="Pagar cobro">
         <form>
         <fieldset>
             <div class="separacion"><label for="Tipo pago" class="labels">Tipo Pago</label></div>
@@ -101,6 +102,16 @@ conectar();
         </fieldset>
         </form>
         </div>        
+        <!-- ---------------------------------------------Ventana Modal Modificar Cobros-------------------------------------------------------- -->
+        <div id="dialog-form-modificar" id_cobro="" title="Modificar cobro">
+        <form>
+        <fieldset>
+            <div class="separacion"><label for="concepto" class="labels">Monto a cobrar:</label></div>
+            <div class="separacion"><input type="text" name="txt_montom" id="txt_montom" class="inputbox_peq" /></div>            
+        </fieldset>
+        </form>
+        </div>
+
     </body>
 <script src="includes/jquery-1.9.0.min.js"type="text/javascript" ></script>   
 <script src="includes/ui/jquery-ui.js"></script> 

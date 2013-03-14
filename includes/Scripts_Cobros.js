@@ -78,20 +78,16 @@ var parametros=$('#cmb_cliente').val()+",";
         $( "#dialog-form" ).dialog( "open" );
     });
 
-/***************************************Dialog Form Crear archivo*************************************************************/
+/***************************************Dialog Form pagar cobro*************************************************************/
     $( "#dialog-form-pagar" ).dialog({       
       autoOpen: false,
       height: 200,
       width: 350,
       modal: false,
       buttons: {
-       Finalizar: function() {
-          //$('#txt_descripcion').val()='';
-          $('#progress').empty();          
+       Finalizar: function() {          
           $( this ).dialog( "close" );
-          guarda_pago();        
-
-
+          guardar_pago($(this).attr("id_cobro"),0);        
       },        
         Cancelar: function() {
           $( this ).dialog( "close" );
@@ -104,8 +100,36 @@ var parametros=$('#cmb_cliente').val()+",";
     });
  
     $(document).on("click", "a.pagar_cobros", function(){ 
-        
+        $( "#dialog-form-pagar" ).attr("id_cobro",$(this).attr("id"));
         $( "#dialog-form-pagar" ).dialog( "open" );
+        
+
+    });
+
+    /***************************************Dialog Form modifcar cobro*************************************************************/
+    $( "#dialog-form-modificar" ).dialog({       
+      autoOpen: false,
+      height: 250,
+      width: 350,
+      modal: false,
+      buttons: {
+       Finalizar: function() {          
+          $( this ).dialog( "close" );
+          modificar_pago($(this).attr("id_cobro"),0);        
+      },        
+        Cancelar: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        allFields.val( "" ).removeClass( "ui-state-error" );
+        
+      }
+    });
+ 
+    $(document).on("click", "a.modificar_cobros", function(){ 
+        $("#dialog-form-modificar").attr("id_cobro",$(this).attr("id"));
+        $("#dialog-form-modificar").dialog( "open" );
         
 
     });
@@ -125,6 +149,32 @@ $(document).on("click", "img.buscar_numeros", function(){
 
 });
 
+/************************************Guarda el pago de un cobro************************************************************/
+/**********************************************
+Accion:llama al metodo para marcar un cobro como pagado
+Parametros:id del cobro
+Ivocación:Boton upload_file y guard_archivo busca_archivos.
+/**********************************************/
+function guardar_pago(id_cobro,id_expediente){
+    var parametros=id_cobro+","+id_expediente;
+    $.ajax({ data: "metodo=guardar_pago&parametros="+parametros,
+     type: "POST",
+     dataType: "json",
+     url: "../operaciones/Clase_Cobros.php",
+     success: function (data){
+
+     }
+ 
+     });
+  despliega_header_expediente(id_expediente,0);
+  despliega_cobros(id_expediente,0);
+
+
+}
+
+
+
+
 
 /************************************Despliega Cobros************************************************************/
 /**********************************************
@@ -143,7 +193,11 @@ function despliega_cobros(id,numero){
       var dataJson = eval(data);          
       vhtml='<div id="header_expediente"> <table><tr class="subtitulos"><td width="200">Monto</td><td>Concepto</td><td>Fecha Creación</td><td>Fecha Pago</td><td>Operaciones</td></tr>';
       for(var i in dataJson){
-        vhtml=vhtml+'<tr><td>'+dataJson[i].monto+'</td><td>'+dataJson[i].concepto+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_pago+'</td><td><img src="img/edit_icon.png" title="Editar"><a class="pagar_cobros" id="'+dataJson[i].id+'" id_expediente="'+dataJson[i].id_expediente+'"><img  class="iconos" src="img/pagar.png" title="Pagar"></a><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td>';
+        if(dataJson[i].estado==0){
+          vhtml=vhtml+'<tr><td>'+dataJson[i].monto+'</td><td>'+dataJson[i].concepto+'</td><td>'+dataJson[i].fecha_creacion+'</td><td></td><td><a class="modificar_cobros" id="'+dataJson[i].id+'" id_expediente="'+dataJson[i].id_expediente+'"><img src="img/edit_icon.png" title="Editar"><a class="pagar_cobros" id="'+dataJson[i].id+'" id_expediente="'+dataJson[i].id_expediente+'"><img  class="iconos" src="img/pagar.png" title="Pagar"></a><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></td>';
+        }else{
+          vhtml=vhtml+'<tr><td>'+dataJson[i].monto+'</td><td>'+dataJson[i].concepto+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_pago+'</td><td></td>';
+        }
       }
       vhtml=vhtml+'<table></div>';
       $('.box_contenidos').append(vhtml);
