@@ -111,7 +111,7 @@ class Expedientes{
 	function modificar_cobro($parametros,$hoy){					
 		$v_datos=explode(",",$parametros);
 		//busco si lo que me estan dando es un numero de expediente
-		$result=mysql_query("update tbl_cobros set monto='".$v_datos[1]."' where id='".$v_datos[0]."'");
+		$result=mysql_query("update tbl_cobros set monto='".trim($v_datos[2])."' where id='".$v_datos[0]."'");
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{

@@ -115,7 +115,7 @@ var parametros=$('#cmb_cliente').val()+",";
       buttons: {
        Finalizar: function() {          
           $( this ).dialog( "close" );
-          modificar_pago($(this).attr("id_cobro"),0);        
+          modificar_pago($(this).attr("id_cobro"),$(this).attr("id_expediente"),$("#txt_montom").val());        
       },        
         Cancelar: function() {
           $( this ).dialog( "close" );
@@ -129,6 +129,7 @@ var parametros=$('#cmb_cliente').val()+",";
  
     $(document).on("click", "a.modificar_cobros", function(){ 
         $("#dialog-form-modificar").attr("id_cobro",$(this).attr("id"));
+        $("#dialog-form-modificar").attr("id_expediente",$(this).attr("id_expediente"));
         $("#dialog-form-modificar").dialog( "open" );
         
 
@@ -158,6 +159,29 @@ Ivocación:Boton upload_file y guard_archivo busca_archivos.
 function guardar_pago(id_cobro,id_expediente){
     var parametros=id_cobro+","+id_expediente;
     $.ajax({ data: "metodo=guardar_pago&parametros="+parametros,
+     type: "POST",
+     dataType: "json",
+     url: "../operaciones/Clase_Cobros.php",
+     success: function (data){
+
+     }
+ 
+     });
+  despliega_header_expediente(id_expediente,0);
+  despliega_cobros(id_expediente,0);
+}
+
+/************************************Modificar el monto de un cobro************************************************************/
+/**********************************************
+Accion:llama al metodo para marcar un cobro como pagado
+Parametros:id del cobro
+Ivocación:Boton upload_file y guard_archivo busca_archivos.
+/**********************************************/
+function modificar_pago(id_cobro,id_expediente,monto){
+    var texto=" es una prueba"
+    monto=fTrim(monto);
+    var parametros=id_cobro+","+id_expediente+","+monto;
+    $.ajax({ data: "metodo=modificar_cobro&parametros="+parametros,
      type: "POST",
      dataType: "json",
      url: "../operaciones/Clase_Cobros.php",
@@ -303,6 +327,14 @@ $( document ).tooltip({
       }
 });
 
+/**********************************Poner separadores de miles******************************************/
+
+$('#txt_montom').keydown(function(){
+    var str = $(this).val();
+    str = str.replace(/\D+/g, '');
+    $(this).val(str.replace(/\d(?=(?:\d{3})+(?!\d))/g, '$& '));
+});
+
 /************************************Notificaciones Jquery************************************************************/
 function notificacion(titulo,cuerpo,tipo){
   $.pnotify({
@@ -311,6 +343,21 @@ function notificacion(titulo,cuerpo,tipo){
     pnotify_type: tipo,
     pnotify_hide: true
   }); 
+}
+
+function fTrim(Str)
+{
+  cadena = "" + Str + "";
+  
+  for(i=0; i=0; i=cadena.length-1)
+  {
+    if(cadena.charAt(i)==" ")
+      cadena=cadena.substring(0,i);
+    else
+      break;
+  }
+  
+  return cadena;
 }
 
 

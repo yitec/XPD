@@ -82,7 +82,7 @@ conectar();
         </form>
         </div>        
         <!-- ---------------------------------------------Ventana Modal Pagar Cobros-------------------------------------------------------- -->
-        <div id="dialog-form-pagar" id_cobro="" title="Pagar cobro">
+        <div id="dialog-form-pagar" id_cobro="" id_expediente="" title="Pagar cobro">
         <form>
         <fieldset>
             <div class="separacion"><label for="Tipo pago" class="labels">Tipo Pago</label></div>
@@ -106,7 +106,7 @@ conectar();
         <div id="dialog-form-modificar" id_cobro="" title="Modificar cobro">
         <form>
         <fieldset>
-            <div class="separacion"><label for="concepto" class="labels">Monto a cobrar:</label></div>
+            <div class="separacion"><label for="monto" class="labels">Monto a cobrar:</label></div>
             <div class="separacion"><input type="text" name="txt_montom" id="txt_montom" class="inputbox_peq" /></div>            
         </fieldset>
         </form>
