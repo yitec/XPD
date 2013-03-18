@@ -4,7 +4,9 @@ $(document).ready(function(){
   var archivo;
 
 //**********************************cargo el vector de usuarios ****************************************************************/
-var availableTags;
+var availableTags=busca_nombres();
+
+function busca_nombres(){
     $.ajax({ data: "metodo=autocompleta_clientes",
         type: "POST",
         async: false,
@@ -17,6 +19,42 @@ var availableTags;
     $( "#txt_buscar" ).autocomplete({
       source: availableTags
     });
+}
+/********************************************Buscar expediente*****************************************************************/
+/**********************************************
+Accion:Busca un expediente por numero o nombre
+Parametros:datos del input txt_buscar
+Ivocación:click img_biscar
+/**********************************************/
+
+$('#btn_buscar').click(function(){
+    var parametros=$("#txt_buscar").val()+",";
+    $.ajax({ 
+    data: "metodo=busca_cliente&parametros="+parametros,
+    type: "POST",
+    async:false,
+    dataType: "json",
+    url: "../operaciones/Clase_clientes.php",
+    success: function (data){
+      if (data.resultado=="Success"){
+          $("#id_cliente").attr("value",data.id_cliente);
+          $("#txt_nombre").attr("value",data.nombre);
+          $("#txt_cedula").attr("value",data.cedula);
+          $("#txt_correo").attr("value",data.correo);
+          $("#txt_tel_cel").attr("value",data.tel_cel);
+          $("#txt_tel_fijo").attr("value",data.tel_fijo);
+          $("#txt_fax").attr("value",data.fax);
+          $("#txt_direccion").attr("value",data.direccion);
+          $("#opcion").attr("value","2");
+          
+      }
+    }
+
+    });
+
+});
+
+
 
 /********************************Guardo un nuevo cliente***************************************************************/
 
@@ -31,45 +69,46 @@ $("#btn_guardar").click(function(event){
     
     if($('#opcion').val()==1){      
       var parametros=$("#txt_nombre").val()+","+$("#txt_cedula").val()+","+$("#txt_correo").val()+","+$("#cmb_tipo").val()+","+$("#txt_tel_cel").val()+","+$("#txt_tel_fijo").val()+","+$("#txt_fax").val()+","+$("#txt_direccion").val();
-    $.ajax({
+      $.ajax({
         data: "metodo=crea_cliente&parametros="+parametros,
         type: "POST",
+        async:false,
         dataType: "json",        
         url: "operaciones/Clase_Clientes.php",
                    
-    success: function(data){     
-    if (data.resultado=="Success"){
+        success: function(data){     
+      if (data.resultado=="Success"){
         notificacion("Nuevo cliente creado","El cliente fue creado!!","info");          
-    }else{
+      }else{
         notificacion("Error","Intente de nuevo","error");                
-    }
-        
-        
-    }//end succces function
-    });//end ajax function      
-    $('#txt_codigo').focus(); 
+      }
+      }//end succces function
+      });//end ajax function      
+      limpiar();        
+      $('#txt_buscar').attr('value','');
+      busca_nombres();
+      $('#txt_buscar').focus(); 
     }else{
-
-    //modifico los datos del producto
-    cadena="opcion=3&txt_nombre="+$('#txt_nombre').val()+"&txt_cedula="+$('#txt_cedula').val()+"&txt_correo="+$('#txt_correo').val()+"&txt_fax="+$('#txt_fax').val()+"&txt_direccion="+$('#txt_direccion').val()+"&txt_tel_fijo="+$('#txt_tel_fijo').val()+"&txt_tel_cel="+$('#txt_tel_cel').val()+"&cmb_tipo="+$('#cmb_tipo').val()+"&txt_consumible="+$('#txt_consumible').val()+"&rnd_credito="+$('input[name=rnd_credito]:checked').attr('value')+"&txt_usuario_buscar="+$('#txt_usuario_buscar').val();
-    $.ajax({
+      var parametros=$("#id_cliente").val()+","+$("#txt_nombre").val()+","+$("#txt_cedula").val()+","+$("#txt_correo").val()+","+$("#cmb_tipo").val()+","+$("#txt_tel_cel").val()+","+$("#txt_tel_fijo").val()+","+$("#txt_fax").val()+","+$("#txt_direccion").val();
+      $.ajax({
+        data: "metodo=modifica_cliente&parametros="+parametros,
         type: "POST",
-    async: false,
-        url: "operaciones/opr_clientes.php",
-        data: cadena,   
-    success: function(datos){
-
-        $.pnotify({
-          pnotify_title: 'Cliente Modificado',
-          pnotify_text: '',
-          pnotify_type: 'info',
-          pnotify_hide: true
-      });   
-    }//end succces function
-    });//end ajax function      
-    }//end if 
-    
-limpiar();
+        async:false,
+        dataType: "json",        
+        url: "operaciones/Clase_Clientes.php",                  
+        success: function(data){     
+          if (data.resultado=="Success"){
+            notificacion("Cliente modificado","El cliente fue modificado","info");          
+          }else{
+            notificacion("Error","Intente de nuevo","error");                
+          }              
+        }//end succces function
+        });//end ajax function      
+        limpiar();        
+        $('#txt_buscar').attr('value','');
+        busca_nombres();
+        $('#txt_buscar').focus(); 
+    }
 });
 
 
@@ -83,7 +122,7 @@ function limpiar(){
       $('#txt_tel_fijo').attr('value','');
       $('#txt_fax').attr('value','');
       $('#txt_direccion').attr('value','');      
-      $('#txt_usuario_buscar').attr('value','');            
+      $('#txt_buscar').attr('value','');            
       $('#opcion').attr('value','1'); 
 }
 

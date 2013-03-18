@@ -23,10 +23,10 @@ conectar();
                 <div class="sub_header">
                     <span id="add"><a href="add.php"><img src="img/add.png" title="Crear un cliente"></a></span>
                     <span id="search" class="ui-widget"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" id="txt_buscar" title="Buscar un cliente." value="" /></span>
-                    <span id="search_icon"><img  src="img/search.png"></span>                    
+                    <span id="search_icon"><img  id="btn_buscar" src="img/search.png"></span>                    
                 </div> 
-                    <h2>Clientes</h2>               
-                    <div class="box_contenidos">   
+            
+                    <div class="box_contenidosv">   
                     <table>
                         <tr>
                             <td>Nombre</td>
@@ -58,17 +58,17 @@ conectar();
                         <td>Fax</td>
                         <td>Direcci&oacute;n</td>
                         <td>Credito</td>
-                        </tr>
+                       </tr>
                         <tr>
                             <td><input id="txt_fax" class="inputbox" type="text" /></td>
-                            <td><input  id="txt_direccion"  class="inputbox" type="text" /><input id="opcion" name="opcion" type="hidden" value="1" /></td>
+                            <td><input  id="txt_direccion"  class="inputbox" type="text" /></td>
                             <td><input type="checkbox" name="rnd_credito" value="1" id="rnd_credito_1" />
                             </span></td>
                         </tr>
                         
                     </table>
                     </div>
-                    <div align="center"><input type="hidden" id="opcion" name="opcion" value="1"><input type="submit" value="Guardar" id="btn_guardar" name="submit" class="submit" /></div>
+                    <div align="center"><input type="hidden" id="opcion" name="opcion" value="1"><input type="hidden" id="id_cliente" name="id_cliente" value=""><input type="submit" value="Guardar" id="btn_guardar" name="submit" class="submit" /></div>
                 <div class="sub_footer">Seleccione una opción</div>                
 			</div>		
     </body>

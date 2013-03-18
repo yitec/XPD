@@ -178,11 +178,11 @@ Parametros:id del cobro
 Ivocación:Boton upload_file y guard_archivo busca_archivos.
 /**********************************************/
 function modificar_pago(id_cobro,id_expediente,monto){
-    var texto=" es una prueba"
     monto=fTrim(monto);
     var parametros=id_cobro+","+id_expediente+","+monto;
     $.ajax({ data: "metodo=modificar_cobro&parametros="+parametros,
      type: "POST",
+     async:false,
      dataType: "json",
      url: "../operaciones/Clase_Cobros.php",
      success: function (data){
@@ -211,6 +211,7 @@ function despliega_cobros(id,numero){
 	var parametros=id+","+numero;
   $.ajax({ data: "metodo=obtiene_cobros&parametros="+parametros,
     type: "POST",
+    async:false,
     dataType: "json",
     url: "../operaciones/Clase_Cobros.php",
     success: function (data){
@@ -243,6 +244,7 @@ function despliega_header_expediente(id,numero){
     $.ajax({ 
     data: "metodo=busca_header_expediente&parametros="+parametros,
     type: "POST",
+    async:false,
     dataType: "json",
     url: "../operaciones/Clase_Cobros.php",
     success: function (data){
@@ -295,6 +297,7 @@ $('#btn_buscar').click(function(){
     $.ajax({ 
     data: "metodo=busca_expediente&parametros="+parametros,
     type: "POST",
+    async:false,
     dataType: "json",
     url: "../operaciones/Clase_Cobros.php",
     success: function (data){
@@ -330,52 +333,23 @@ $( document ).tooltip({
 /**********************************Poner separadores de miles******************************************/
 
 
-$('#txt_montom').keydown(function(){
-    pat = /[\*,\+,\(,\),\?,\,$,\[,\],\^]/;
-  valor = donde.value;
-  largo = valor.length;
-  crtr = true;
-  pat = /[\*,\+,\(,\),\?,\,$,\[,\],\^]/;
-  valor = donde.value;
-  largo = valor.length;
-  crtr = true;
-  if(isNaN(caracter) || pat.test(caracter) == true){
-    if (pat.test(caracter)==true){ 
-      caracter = "\" + caracter
-    }
-    carcter = new RegExp(caracter,"g")
-    valor = valor.replace(carcter,"")
-    donde.value = valor
-    crtr = false
-  }
-  else{
-    var nums = new Array()
-    cont = 0
-    for(m=0;m<largo;m++){
-      if(valor.charAt(m) == "." || valor.charAt(m) == " ")
-        {continue;}
-      else{
-        nums[cont] = valor.charAt(m)
-        cont++
-      }
-    }
-  }
-  var cad1="",cad2="",tres=0
-  if(largo > 3 && crtr == true){
-    for (k=nums.length-1;k>=0;k--){
-      cad1 = nums[k]
-      cad2 = cad1 + cad2
-      tres++
-      if((tres%3) == 0){
-        if(k!=0){
-          cad2 = "." + cad2
-        }
-      }
-    }
-    donde.value = cad2
-  }
-
+$('#txt_montom').keyup(function(){
+  $(this).val(format.call($(this).val().split(' ').join(''),' ','.'));
 });
+
+function format(comma, period) {
+  comma = comma || ',';
+  period = period || '.';
+  var split = this.toString().split('.');
+  var numeric = split[0];
+  var decimal = split.length > 1 ? period + split[1] : '';
+  var reg = /(\d+)(\d{3})/;
+  while (reg.test(numeric)) {
+    numeric = numeric.replace(reg, '$1' + comma + '$2');
+  }
+  return numeric + decimal;
+}
+
 
 /************************************Notificaciones Jquery*********************************************/
 function notificacion(titulo,cuerpo,tipo){

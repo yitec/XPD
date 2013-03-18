@@ -43,123 +43,46 @@ function crea_cliente($parametros,$hoy){
 }
 	
 	
-
-	/*******************************************************
-	accion="busca un expediente"
-	parametros="nombre del valor a buscar"
-
-	********************************************************/
-	function busca_header_expediente($parametros,$hoy){
-		
-				
-		$v_datos=explode(",",$parametros);
-		//busco si lo que me estan dando es un numero de expediente
-		$result=mysql_query("select e.id,e.numero,e.id_tipoExpediente,e.fecha_creacion, e.fecha_modificacion,e.id_cliente,e.estado,c.nombre from tbl_expedientes e,tbl_clientes c where e.id='".$v_datos[0]."' and c.id=e.id_cliente");
-		if (mysql_num_rows($result)>0){
-			$row=mysql_fetch_object($result);
-			$_SESSION['id_expediente']=$row->id;
-			$jsondata['id_expediente']=$row->id;
-			$jsondata['numero_expediente']=$row->numero;
-			$jsondata['id_tipoExpediente']=$row->id_tipoExpediente;
-			$jsondata['fecha_creacion']=$row->fecha_creacion;
-			$jsondata['fecha_modificacion']=$row->fecha_modificacion;
-			$jsondata['id_cliente']=$row->id_cliente;
-			$jsondata['nombre_cliente']=utf8_encode($row->nombre);
-			$jsondata['estado']=$row->estado;
-			$jsondata['resultado']="Success";
-			echo json_encode($jsondata);
-		}
-	}	
-
-	/*******************************************************
-	accion="busca un todos los numerod de expediente pertenecientes a un cliente"
-	parametros="nombre del cliente a buscar"
-
-	********************************************************/
-	function obtiene_nexpedientes($parametros,$hoy){
-		$v_datos=explode(",",$parametros);
-		$id_cliente=$v_datos[0];		
-		$result=mysql_query("select * from tbl_expedientes where id_cliente='".$id_cliente."' order by titulo DESC");
-		if (!$result) {//si da error que me despliegue el error del query       		
-       		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
-        }else{
-        	while ($row=mysql_fetch_object($result)){							
-				$arr[] = array('id' => $row->id,
-								'numero' => $row->numero,
-								'titulo' => $row->titulo,
-
-        		);
-			}
-		}	
-		echo json_encode($arr);
-    }
-	
-	/*******************************************************
-	accion="busca un expediente"
-	parametros="nombre del valor a buscar"
-
-	********************************************************/
-	function busca_expediente($parametros,$hoy){
-		
-				
-		$v_datos=explode(",",$parametros);
-		//busco si lo que me estan dando es un numero de expediente
-		$result=mysql_query("select e.id,e.numero,e.id_tipoExpediente,e.fecha_creacion, e.fecha_modificacion,e.id_cliente,e.estado,c.nombre from tbl_expedientes e,tbl_clientes c where e.numero='".$v_datos[0]."' and c.id=e.id_cliente");
-		if (mysql_num_rows($result)>0){
-			$row=mysql_fetch_object($result);
-			$_SESSION['id_expediente']=$row->id;
-			$jsondata['id_expediente']=$row->id;
-			$jsondata['numero_expediente']=$row->numero;
-			$jsondata['id_tipoExpediente']=$row->id_tipoExpediente;
-			$jsondata['fecha_creacion']=$row->fecha_creacion;
-			$jsondata['fecha_modificacion']=$row->fecha_modificacion;
-			$jsondata['id_cliente']=$row->id_cliente;
-			$jsondata['nombre_cliente']=utf8_encode($row->nombre);
-			$jsondata['estado']=$row->estado;
-			$jsondata['resultado']="Success";
-			echo json_encode($jsondata);	
-		}else{
-			//busco los expedientes ligados a ese nombre de cliente
-			$result=mysql_query("select id from tbl_clientes where nombre='".utf8_decode($v_datos[0])."'");
-			if (mysql_num_rows($result)>0){
-				$row=mysql_fetch_object($result);
-				$result2=mysql_query("select id,numero,titulo from tbl_expedientes where id_cliente='".$row->id."'");
-				while ($r1=mysql_fetch_object($result2)) {
-					$arr[] = array('id_expediente' => $r1->id,
-								'numero' => $r1->numero,
-								'titulo' => utf8_encode($r1->titulo),
-                   	);					
-				}
-			echo json_encode($arr);				
-			}			
-
-		}
-		
+function busca_cliente($parametros,$hoy){
+	$v_datos=explode(",",$parametros);	
+	$result=mysql_query("select * from tbl_clientes where nombre='".$v_datos[0]."'");
+	$row=mysql_fetch_object($result);
+	if (mysql_num_rows($result)>=1){
+		$jsondata['id_cliente']=$row->id;		
+		$jsondata['nombre']=utf8_decode($row->nombre);		
+		$jsondata['cedula']=$row->cedula;
+		$jsondata['correo']=$row->email;		
+		$jsondata['fax']=$row->fax;
+		$jsondata['direccion']=utf8_decode($row->direccion);
+		$jsondata['tel_fijo']=$row->tel_fijo;
+		$jsondata['tel_cel']=$row->tel_cel;
+		$jsondata['id_tipoCliente']=$row->id_tipoCliente;
+		$jsondata['credito']=$row->credito;	
+		$jsondata['resultado']="Success";	
 	}
+	echo json_encode($jsondata);
+}
 
-	/*******************************************************
-	accion="crea un cobro"
-	parametros="nombre del valor a buscar"
-	invocacion= "botno add"
-	/*******************************************************/
-
-	function crea_cobros($parametros,$hoy){
-		$v_datos=explode(",",$parametros);
-		$id=$v_datos[0];
-		$tipo=$v_datos[1];
-		$titulo=$v_datos[2];
-		$cliente=$v_datos[3];
-		$result=mysql_query("insert into tbl_cobros (id_expediente,concepto,monto,fecha_creacion,id_usuario,estado) values('".$v_datos[0]."','".utf8_encode($v_datos[1])."','".$v_datos[2]."','".$hoy."','".$_SESSION['usuario']."','"."0"."')");
-		if (!$result) {//si da error que me despliegue el error del query       		
+function modifica_cliente($parametros,$hoy){
+	$v_datos=explode(",",$parametros);	
+	$result=mysql_query("update tbl_clientes set nombre='".utf8_encode($v_datos[1])."',
+		cedula='".$v_datos[2]."',
+		email='".$v_datos[3]."',
+		id_tipoCliente='".$v_datos[4]."',
+		tel_cel='".$v_datos[5]."',
+		tel_fijo='".$v_datos[6]."',		
+		fax='".$v_datos[7]."',
+		direccion='".utf8_encode($v_datos[8])."'
+		 where id='".$v_datos[0]."'");
+	if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
-        	$jsondata['id_expediente'] = $v_datos[0];
-        	$jsondata['resultado'] = "Success";        	
-        	$jsondata['numero_expediente'] = 0;
+        	$jsondata['resultado'] = 'Success';
         }
-        echo json_encode($jsondata);		
-	}
+    echo json_encode($jsondata);	
 
+}
+	
 
 }//end class
 
