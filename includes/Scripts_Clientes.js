@@ -10,7 +10,7 @@ function busca_nombres(){
     $.ajax({ data: "metodo=autocompleta_clientes",
         type: "POST",
         async: false,
-        url: "../operaciones/Clase_Clientes.php",        
+        url: "../XPD/operaciones/Clase_Clientes.php",        
         success: function(data){     
           availableTags =data;      
         }//end succces function
@@ -34,7 +34,7 @@ $('#btn_buscar').click(function(){
     type: "POST",
     async:false,
     dataType: "json",
-    url: "../operaciones/Clase_clientes.php",
+    url: "../XPD/operaciones/Clase_clientes.php",
     success: function (data){
       if (data.resultado=="Success"){
           $("#id_cliente").attr("value",data.id_cliente);

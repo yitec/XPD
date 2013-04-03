@@ -318,11 +318,12 @@ h2{
 #barra_principal{
   margin-top: 0px;
   width: 100%;
-  height: 40px;
-  background: -webkit-linear-gradient(gray,black);
-  background: -moz-linear-gradient(gray,black);
-  background: -o-linear-gradient(gray,black);
-  background: linear-gradient(gray,black);
+  height: 60px;
+  background: -webkit-linear-gradient(#3F3F3F,#373737);
+  background: -moz-linear-gradient(#3F3F3F,#373737);
+  background: -o-linear-gradient(#3F3F3F,#373737);
+  background: linear-gradient(#3F3F3F,#373737);
+ border-bottom: 2px solid #C00; 
   text-align: right;
   color: #fff;
 }

@@ -8,7 +8,7 @@ var availableTags;
     $.ajax({ data: "metodo=autocompleta_clientes",
         type: "POST",
         async: false,
-        url: "../operaciones/Clase_Expedientes.php",        
+        url: "../XPD/operaciones/Clase_Expedientes.php",        
         success: function(data){     
           availableTags =data;      
         }//end succces function
@@ -31,7 +31,7 @@ var availableTags;
         	$.ajax({ data: "metodo=crea_expedientes&parametros="+parametros,
 			type: "POST",
 			dataType: "json",
-			url: "../operaciones/Clase_Expedientes.php",
+			url: "../XPD/operaciones/Clase_Expedientes.php",
 			success: function(data){ 
 				if (data.resultado!="Success"){
 					notificacion("Error","El expediente ya existe o ha sucedido un error","error");					
@@ -116,7 +116,7 @@ function despliega_header_expediente(id,numero){
     data: "metodo=busca_header_expediente&parametros="+parametros,
     type: "POST",
     dataType: "json",
-    url: "../operaciones/Clase_Expedientes.php",
+    url: "../XPD/operaciones/Clase_Expedientes.php",
     success: function (data){
         var vhtml="";
         if(data.estado==1){
@@ -147,7 +147,7 @@ function despliega_archivos(id,numero){
 	$.ajax({ data: "metodo=despliega_archivos&parametros="+parametros,
 			type: "POST",
 			dataType: "json",
-			url: "../operaciones/Clase_Expedientes.php",
+			url: "../XPD/operaciones/Clase_Expedientes.php",
 			success: function(data){ 
 					var dataJson = eval(data);
             			
@@ -174,7 +174,7 @@ $(document).on("click", "a.eliminar", function(){
   $.ajax({ data: "metodo=elimina_archivos&parametros="+parametros,
       type: "POST",
       dataType: "json",
-      url: "../operaciones/Clase_Expedientes.php",
+      url: "../XPD/operaciones/Clase_Expedientes.php",
       success: function(data){ 
           if (data.resultado=="Succes"){
             alert ("eliminado");
@@ -243,7 +243,7 @@ function guarda_archivo(){
   $.ajax({ data: "metodo=guarda_archivo&parametros="+parametros,
     type: "POST",
     dataType: "json",
-    url: "../operaciones/Clase_Expedientes.php",
+    url: "../XPD/operaciones/Clase_Expedientes.php",
     success: function (data){
       if (data.resultado>0){
       //despliega_archivos(data.resultado,0);
@@ -274,7 +274,7 @@ $('#btn_buscar').click(function(){
     data: "metodo=busca_expediente&parametros="+parametros,
     type: "POST",
     dataType: "json",
-    url: "../operaciones/Clase_Expedientes.php",
+    url: "../XPD/operaciones/Clase_Expedientes.php",
     success: function (data){
       if (data.id_expediente>0){
         despliega_header_expediente(data.id_expediente,data.numero_expediente);
