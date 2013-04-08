@@ -12,7 +12,7 @@ conectar();
         <link rel ="stylesheet" href="../css/reportes.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
-        <title>Clientes</title>
+        <title>Listado Clientes</title>
     </head>
     <body >
     		<div id="barra_principal"></div>                  
@@ -20,13 +20,13 @@ conectar();
     		<div class="box_mprincipal">
                 <div class="sub_header">
                 </div>                     
-                <h2>Total Expedientes</h2>                   
+                <h2>Listado Clientes</h2>                   
                 <div class="box_contenidos">   
                 <div align="center">    
-                    <table >
+                    <table class="punteado" >
                         <tr>
                             <td class="subtitulos">Nombre Cliente</td>
-                            <td class="subtitulos">Total Expedientes</td>                            
+                            <td class="subtitulos" align="center">Total Expedientes</td>                            
                         </tr>
                         <?  $result=mysql_query("select * from tbl_clientes");
                             while ($r1=mysql_fetch_object($result)){
@@ -35,7 +35,7 @@ conectar();
                             $r2=mysql_fetch_object($result2);                            
                         ?>
                         <tr>
-                            <td><div align="center" class="resultados"><?=utf8_encode($r1->nombre)?></div></td>
+                            <td><div align="left" class="resultados"><?=utf8_encode($r1->nombre)?></div></td>
                             <td><div align="center" class="resultados"><?=$r2->total?></div></td>
                             
                         </tr>

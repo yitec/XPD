@@ -12,7 +12,7 @@ function busca_nombres(){
     $.ajax({ data: "metodo=autocompleta_usuarios",
         type: "POST",
         async: false,
-        url: "../XPD/operaciones/Clase_Usuarios.php",        
+        url: "../operaciones/Clase_Usuarios.php",        
         success: function(data){     
           availableTags =data;      
         }//end succces function
@@ -37,7 +37,7 @@ $('#btn_buscar').click(function(){
     type: "POST",
     async:false,
     dataType: "json",
-    url: "../XPD/operaciones/Clase_Usuarios.php",
+    url: "../operaciones/Clase_Usuarios.php",
     success: function (data){
       if (data.resultado=="Success"){
           $("#id_usuario").attr("value",data.id_usuario);

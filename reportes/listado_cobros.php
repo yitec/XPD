@@ -12,33 +12,34 @@ conectar();
         <link rel ="stylesheet" href="../css/reportes.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
-        <title>Total Expedientes</title>
+        <title>Total Cobros</title>
     </head>
     <body >
     		<div id="barra_principal"></div>                              
     		<div class="box_mprincipal">
                 <div class="sub_header">
                 </div>                     
-                <h2>Total Expedientes</h2>                   
+                <h2>Listado Cobros</h2>                   
                 <div class="box_contenidos">   
                 <div align="center">    
-                    <table border="1">
-                        <tr>
-                            <td class="subtitulos">Total Expedientes Activos</td>
-                            <td class="subtitulos">Total Expedientes Inactivos</td>                            
-                        </tr>
-                        <?  $result=mysql_query("select COUNT(numero) as total from tbl_expedientes where estado=1");
-                            $r1=mysql_fetch_object($result);
-                            $result=mysql_query("select COUNT(numero) as total from tbl_expedientes where estado=0");
-                            $r2=mysql_fetch_object($result);                            
-                        ?>
-                        <tr>
-                            <td><div align="center" class="resultados"><?=$r1->total?></div></td>
-                            <td><div align="center" class="resultados"><?=$r2->total?></div></td>
-                            
-                        </tr>
-                    </table>
-                </div>    
+                    <table class="punteado">
+                    <tr class="subtitulos">                        
+                        <td id="archivo">Expediente</td>
+                        <td id="creacion">Creación</td>
+                        <td id="actualizacion">Monto</td>                        
+                    </tr>
+                    <? $result=mysql_query("select c.id, e.numero, c.fecha_creacion, c.monto from tbl_cobros c, tbl_expedientes e where c.estado=0 and e.id=c.id_expediente order by c.fecha_creacion");
+                        while ($row=mysql_fetch_object($result)){
+                            $total=$total+$row->monto;
+                            echo '<tr>                        
+                            <td>'.$row->numero.'</td>
+                            <td>'.$row->fecha_creacion.'</td>
+                            <td>'.$row->monto.'</td>                            
+                            </tr>';
+                        }
+                    ?>                                        
+                    </table>            
+                    <table ><tr class="subtitulos"><td width="400">Total</td></td><td width="100"><?=number_format($total)?></td></tr></table>                    
                 </div>                
                 <div class="sub_footer">Seleccione una opción</div>                
 			</div>		

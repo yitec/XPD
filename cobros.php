@@ -38,14 +38,14 @@ conectar();
                             echo '<tr>                        
                             <td>'.$row->numero.'</td>
                             <td>'.$row->fecha_creacion.'</td>
-                            <td>'.$row->monto.'</td>                            
+                            <td>'.number_format($row->monto).'</td>                            
                             </tr>';
                         }
                     ?>                    
                     <tr>                        
                         <td></td>
                         <td><div class="subtitulos">Total:</div></td>
-                        <td><div class="subtitulos"><?=$total?></div></td>
+                        <td><div class="subtitulos"><?=number_format($total)?></div></td>
                         
                     </tr>                                        
                     </table>            

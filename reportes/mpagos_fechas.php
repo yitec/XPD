@@ -12,11 +12,10 @@ conectar();
         <link rel ="stylesheet" href="../css/reportes.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
-        <title>Clientes</title>
+        <title>Reporte Pagos</title>
     </head>
     <body >
-    		<div id="barra_principal"></div>                  
-            <?include ('../menu_superior.php');?>            
+    		<div id="barra_principal"></div>                         
     		<div class="box_mprincipal">
                 <div class="sub_header">
                 </div>                     
@@ -36,7 +35,7 @@ conectar();
                         </tr>
                     </table>
                 </div>
-                <div align="center"><input type="hidden" id="opcion" name="opcion" value="1"><input type="submit" value="Generar" id="btn_guardar" name="submit" class="submit" /></div>
+                <div align="center"><input type="hidden" id="opcion" name="opcion" value="1"><input type="submit" value="Generar" id="btn_generar_pagos" name="submit" class="submit" /></div>
                 <div class="sub_footer">Seleccione una opción</div>                
 			</div>		
     </body>

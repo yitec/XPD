@@ -12,11 +12,11 @@ conectar();
         <link rel ="stylesheet" href="../css/reportes.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
-        <title>Clientes</title>
+        <title>Menú Reportes</title>
     </head>
     <body >
     		<div id="barra_principal"></div>                  
-            <?include ('../menu_superior.php');?>            
+            <?include ('../menu_superior_reportes.php');?>            
     		<div class="box_mprincipal">
                 <div class="sub_header">
                 </div>                     
