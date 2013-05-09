@@ -13,6 +13,7 @@ conectar();
         <link rel ="stylesheet" href="css/expedientes.css" type="text/css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="css/jquery.pnotify.default.css" type="text/css" />                
         <title>Usuarios</title>
     </head>
     <body >
