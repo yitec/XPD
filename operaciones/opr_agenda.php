@@ -1,5 +1,6 @@
 <?php
 session_start();
+//require_once('../cnx/conexion.php');
 require_once('../cnx/conexion.php');
 conectar();
 
@@ -15,16 +16,16 @@ if( in_array( $functionName, $allowedFunctions ) && function_exists( $functionNa
 {
 		switch ($functionName) {
 			case 'eventos':
-				$functionName($id);	
+				$functionName($_POST['id']);	
 			break;
 			case 'agregar':
-				$functionName($usuario,$fecha_ini,$fecha_fin,$titulo,$detalles);	
+				$functionName($_POST['usuario'],$_POST['fecha_ini'],$_POST['fecha_fin'],$_POST['$titulo'],$_POST['detalles']);	
 			break;
 			case 'modificar':
-				$functionName($id,$usuario,$fecha_ini,$fecha_fin,$titulo,$detalles);
+				$functionName($_POST['id'],$_POST['usuario'],$_POST['fecha_ini'],$_POST['fecha_fin'],$_POST['titulo'],$_POST['detalles']);
 			break;
 			case 'eliminar':
-				$functionName($id);
+				$functionName($_POST['id']);
 			break;			
 		}
 }	
@@ -32,7 +33,9 @@ if( in_array( $functionName, $allowedFunctions ) && function_exists( $functionNa
 function eventos($usuario) {
 	try{
 		$result=mysql_query("select * from tbl_agenda where id_usuario='". $usuario."'")or throw_ex(mysql_error());
+		//$result=mysql_query("select * from tbl_agenda")or throw_ex(mysql_error());
 		$cont=0;
+		if (mysql_num_rows($result)>0){
 		while ($row=mysql_fetch_object($result)){
 			if ($cont==0){
 				$cont++;
@@ -43,6 +46,9 @@ function eventos($usuario) {
 			}
 		}			
 		$jsondata['evento']=utf8_encode($eventos);
+		}else{
+			$jsondata['evento']="No se encontraron eventos";
+		}
 		desconectar();			
 	}
 	catch(exception $e){

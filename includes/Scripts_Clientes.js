@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	
-  var archivo;
+  
+var archivo;
 
 //**********************************cargo el vector de usuarios ****************************************************************/
 var availableTags=busca_nombres();
@@ -34,7 +34,7 @@ $('#btn_buscar').click(function(){
     type: "POST",
     async:false,
     dataType: "json",
-    url: "../XPD/operaciones/Clase_clientes.php",
+    url: "../XPD/operaciones/Clase_Clientes.php",
     success: function (data){
       if (data.resultado=="Success"){
           $("#id_cliente").attr("value",data.id_cliente);
@@ -74,7 +74,7 @@ $("#btn_guardar").click(function(event){
         type: "POST",
         async:false,
         dataType: "json",        
-        url: "operaciones/Clase_Clientes.php",
+        url: "../XPD/operaciones/Clase_Clientes.php",
                    
         success: function(data){     
       if (data.resultado=="Success"){
@@ -95,7 +95,7 @@ $("#btn_guardar").click(function(event){
         type: "POST",
         async:false,
         dataType: "json",        
-        url: "operaciones/Clase_Clientes.php",                  
+        url: "../XPD/operaciones/Clase_Clientes.php",                  
         success: function(data){     
           if (data.resultado=="Success"){
             notificacion("Cliente modificado","El cliente fue modificado","info");          
@@ -115,14 +115,14 @@ $("#btn_guardar").click(function(event){
 
 /***************************************Limpiar todos los campos***************************************/
 function limpiar(){
-      $('#txt_nombre').attr('value','');
-      $('#txt_cedula').attr('value','');
-      $('#txt_correo').attr('value','');
-      $('#txt_tel_cel').attr('value','');
-      $('#txt_tel_fijo').attr('value','');
-      $('#txt_fax').attr('value','');
-      $('#txt_direccion').attr('value','');      
-      $('#txt_buscar').attr('value','');            
+      $('#txt_nombre').val('');
+      $('#txt_cedula').val('');
+      $('#txt_correo').val('');
+      $('#txt_tel_cel').val('');
+      $('#txt_tel_fijo').val('');
+      $('#txt_fax').val('');
+      $('#txt_direccion').val('');      
+      $('#txt_buscar').val('');            
       $('#opcion').attr('value','1'); 
 }
 

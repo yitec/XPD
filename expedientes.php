@@ -59,7 +59,7 @@ conectar();
     <div class="separacion">
     <select name="cmb_categoria" id="cmb_categoria">
     <?
-    $result=mysql_query("select * from tbl_catExpedientes where estado=1");
+    $result=mysql_query("select * from tbl_catexpedientes where estado=1");
     while($row=mysql_fetch_object($result)){
         echo '<option value="'.$row->id.'">'.utf8_encode($row->nombre).'</option>';
     }

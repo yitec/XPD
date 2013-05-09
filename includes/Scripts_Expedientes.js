@@ -146,14 +146,15 @@ function despliega_archivos(id,numero){
 	var parametros=id+","+numero;
 	$.ajax({ data: "metodo=despliega_archivos&parametros="+parametros,
 			type: "POST",
+      async: false,
 			dataType: "json",
 			url: "../XPD/operaciones/Clase_Expedientes.php",
 			success: function(data){ 
 					var dataJson = eval(data);
             			
-            			vhtml='<div><table><tr class="subtitulos"><td width="210">Descripcion</td><td width="210">Archivo</td><td width="150">Fecha Creación</td><td width="150">Fecha Modificación</td><td width="100">Operaciones</td></tr>';
+            			vhtml='<div><table><tr class="subtitulos"><td width="210">Descripción</td><td width="210">Archivo</td><td width="150">Fecha Creación</td><td width="150">Fecha Modificación</td><td width="100">Operaciones</td></tr>';
             			for(var i in dataJson){
-                			vhtml=vhtml+'<tr><td>'+dataJson[i].descripcion+'</td><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><a target="_blank" href="../server/php/files/'+dataJson[i].nombre_archivo+'"><img  class="iconos" src="img/download_icon.png" title="Descargar"></a><a class="eliminar" file="'+dataJson[i].nombre_archivo+'" id_archivo="'+dataJson[i].id+'" id_expediente="'+id+'" numero_expediente="'+numero+'"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></a></td></tr>';                	
+                			vhtml=vhtml+'<tr><td>'+dataJson[i].descripcion+'</td><td>'+dataJson[i].nombre_archivo+'</td><td>'+dataJson[i].fecha_creacion+'</td><td>'+dataJson[i].fecha_modificacion+'</td><td ><a target="_blank" href="../XPD/server/php/files/'+dataJson[i].nombre_archivo+'"><img  class="iconos" src="img/download_icon.png" title="Descargar"></a><a class="eliminar" file="'+dataJson[i].nombre_archivo+'" id_archivo="'+dataJson[i].id+'" id_expediente="'+id+'" numero_expediente="'+numero+'"><img  class="iconos" src="img/delete_icon.png" title="Eliminar"></a></td></tr>';                	
 	                	}
                 	vhtml=vhtml+'</table></div>';
 					$('.box_contenidos').append(vhtml);

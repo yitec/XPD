@@ -9,6 +9,7 @@ Parametros: Vector con lista de parametros segun metodo
 /****************************************************************************************************************/
 
 $metodo=$_POST['metodo'];
+$parametros=$_POST['parametros'];
 $exp = new Expedientes;
 $exp->$metodo($parametros,$hoy);
 
@@ -152,6 +153,7 @@ class Expedientes{
 		
 				
 		$v_datos=explode(",",$parametros);
+		
 		//busco si lo que me estan dando es un numero de expediente
 		$result=mysql_query("select e.id,e.numero,e.id_tipoExpediente,e.fecha_creacion, e.fecha_modificacion,e.id_cliente,e.estado,c.nombre from tbl_expedientes e,tbl_clientes c where e.numero='".$v_datos[0]."' and c.id=e.id_cliente");
 		if (mysql_num_rows($result)>0){
@@ -169,7 +171,8 @@ class Expedientes{
 			echo json_encode($jsondata);	
 		}else{
 			//busco los expedientes ligados a ese nombre de cliente
-			$result=mysql_query("select id from tbl_clientes where nombre='".utf8_decode($v_datos[0])."'");
+
+			$result=mysql_query("select id from tbl_clientes where nombre='".$v_datos[0]."'");
 			if (mysql_num_rows($result)>0){
 				$row=mysql_fetch_object($result);
 				$result2=mysql_query("select id,numero,titulo from tbl_expedientes where id_cliente='".$row->id."'");
@@ -179,11 +182,9 @@ class Expedientes{
 								'titulo' => utf8_encode($r1->titulo),
                    	);					
 				}
-			echo json_encode($arr);				
-			}			
-
+			echo json_encode($arr);					
+			}					
 		}
-		
 	}
 
 	/*******************************************************

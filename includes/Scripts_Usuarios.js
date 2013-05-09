@@ -12,7 +12,7 @@ function busca_nombres(){
     $.ajax({ data: "metodo=autocompleta_usuarios",
         type: "POST",
         async: false,
-        url: "../operaciones/Clase_Usuarios.php",        
+        url: "../XPD/operaciones/Clase_Usuarios.php",        
         success: function(data){     
           availableTags =data;      
         }//end succces function
@@ -37,7 +37,7 @@ $('#btn_buscar').click(function(){
     type: "POST",
     async:false,
     dataType: "json",
-    url: "../operaciones/Clase_Usuarios.php",
+    url: "../XPD/operaciones/Clase_Usuarios.php",
     success: function (data){
       if (data.resultado=="Success"){
           $("#id_usuario").attr("value",data.id_usuario);
@@ -97,7 +97,7 @@ $("#btn_guardar").click(function(event){
         data: "metodo=crea_usuario&parametros="+parametros,
         type: "POST",
         dataType: "json",        
-        url: "operaciones/Clase_Usuarios.php",
+        url: "../XPD/operaciones/Clase_Usuarios.php",
                    
       success: function(data){     
       if (data.resultado=="Success"){
@@ -127,7 +127,7 @@ $("#btn_guardar").click(function(event){
         type: "POST",
         async:false,
         dataType: "json",        
-        url: "operaciones/Clase_Usuarios.php",                  
+        url: "../XPD/operaciones/Clase_Usuarios.php",                  
         success: function(data){     
           if (data.resultado=="Success"){
             notificacion("Cliente modificado","El cliente fue modificado","info");          
@@ -144,6 +144,7 @@ $("#btn_guardar").click(function(event){
     
         limpiar();        
         $('#txt_buscar').attr('value','');
+        $('#txt_nombre').attr('value','');
         busca_nombres();
         $('#txt_buscar').focus(); 
 });
@@ -152,13 +153,13 @@ $("#btn_guardar").click(function(event){
 
 /***************************************Limpiar todos los campos***************************************/
 function limpiar(){
-      $('#txt_nombre').attr('value','');
-      $('#txt_cedula').attr('value','');
-      $('#txt_pass').attr('value','');
-      $('#txt_usuario').attr('value','');
-      $('#txt_fecha').attr('value','');
-      $('#txt_apellidos').attr('value','');      
-      $('#txt_buscar').attr('value','');            
+      $('#txt_nombre').val('');
+      $('#txt_cedula').val('');
+      $('#txt_pass').val('');
+      $('#txt_usuario').val('');
+      $('#txt_fecha').val('');
+      $('#txt_apellidos').val('');      
+      $('#txt_buscar').val('');            
       $('#opcion').attr('value','1'); 
 }
 

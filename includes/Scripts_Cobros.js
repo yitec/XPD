@@ -8,7 +8,7 @@ var availableTags;
     $.ajax({ data: "metodo=autocompleta_clientes",
         type: "POST",
         async: false,
-        url: "../operaciones/Clase_Expedientes.php",        
+        url: "../XPD/operaciones/Clase_Expedientes.php",        
         success: function(data){     
           availableTags =data;      
         }//end succces function
@@ -24,7 +24,7 @@ var parametros=$('#cmb_cliente').val()+",";
   $.ajax({ data: "metodo=obtiene_nexpedientes&parametros="+parametros,
     type: "POST",
     dataType: "json",
-    url: "../operaciones/Clase_Cobros.php",
+    url: "../XPD/operaciones/Clase_Cobros.php",
     success: function (data){
       var dataJson = eval(data);          
       for(var i in dataJson){
@@ -52,7 +52,7 @@ var parametros=$('#cmb_cliente').val()+",";
         	$.ajax({ data: "metodo=crea_cobros&parametros="+parametros,
 			     type: "POST",
 			     dataType: "json",
-			     url: "../operaciones/Clase_Cobros.php",
+			     url: "../XPD/operaciones/Clase_Cobros.php",
 			success: function(data){ 
 				if (data.resultado!="Success"){
 					notificacion("Error","El cobro ya existe o ha sucedido un error","error");					
@@ -161,7 +161,7 @@ function guardar_pago(id_cobro,id_expediente){
     $.ajax({ data: "metodo=guardar_pago&parametros="+parametros,
      type: "POST",
      dataType: "json",
-     url: "../operaciones/Clase_Cobros.php",
+     url: "../XPD/operaciones/Clase_Cobros.php",
      success: function (data){
 
      }
@@ -184,7 +184,7 @@ function modificar_pago(id_cobro,id_expediente,monto){
      type: "POST",
      async:false,
      dataType: "json",
-     url: "../operaciones/Clase_Cobros.php",
+     url: "../XPD/operaciones/Clase_Cobros.php",
      success: function (data){
 
      }
@@ -213,7 +213,7 @@ function despliega_cobros(id,numero){
     type: "POST",
     async:false,
     dataType: "json",
-    url: "../operaciones/Clase_Cobros.php",
+    url: "../XPD/operaciones/Clase_Cobros.php",
     success: function (data){
       var dataJson = eval(data);          
       vhtml='<div id="header_expediente"> <table><tr class="subtitulos"><td width="200">Monto</td><td>Concepto</td><td>Fecha Creación</td><td>Fecha Pago</td><td>Operaciones</td></tr>';
@@ -246,7 +246,7 @@ function despliega_header_expediente(id,numero){
     type: "POST",
     async:false,
     dataType: "json",
-    url: "../operaciones/Clase_Cobros.php",
+    url: "../XPD/operaciones/Clase_Cobros.php",
     success: function (data){
         var vhtml="";
         if(data.estado==1){
@@ -297,10 +297,10 @@ $('#btn_buscar').click(function(){
     $.ajax({ 
     data: "metodo=busca_expediente&parametros="+parametros,
     type: "POST",
-    async:false,
+    async:true,
     dataType: "json",
-    url: "../operaciones/Clase_Cobros.php",
-    success: function (data){
+    url: "../XPD/operaciones/Clase_Cobros.php",
+    success: function (data){    
       if (data.id_expediente>0){
         despliega_header_expediente(data.id_expediente,data.numero_expediente);
         despliega_cobros(data.id_expediente,0);
