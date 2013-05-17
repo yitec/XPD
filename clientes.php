@@ -22,7 +22,7 @@ conectar();
             <?include ('menu_superior.php');?>
     		<div class="box_mprincipal">
                 <div class="sub_header">
-                    <span id="add"><a href="add.php"><img src="img/add.png" title="Crear un cliente"></a></span>
+                    <span id="add"><a href="add.php"></a></span>
                     <span id="search" class="ui-widget"><label for="buscar">Buscar:</label>&nbsp;&nbsp;<input type="text" class="inputbox" name="txt_buscar" id="txt_buscar" title="Buscar un cliente." value="" /></span>
                     <span id="search_icon"><img  id="btn_buscar" src="img/search.png"></span>                    
                 </div> 

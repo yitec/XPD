@@ -59,12 +59,16 @@ function busca_usuario($parametros,$hoy){
 
 function crea_usuario($parametros,$hoy){
 
-	$v_datos=explode(",",$parametros);	
-	$result=mysql_query("insert into tbl_usuarios(nombre,apellidos,cedula,usuario,clave,fecha_vencimiento,estado,ids_accesos,ids_reportes)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".$v_datos[2]."','".$v_datos[3]."','".$v_datos[4]."','".$v_datos[5]."','"."1"."','".$v_datos[6]."','".$v_datos[7]."')");
+	$v_datos=explode(",",$parametros);
+	$dia=substr($v_datos[5], 3, 2);	
+	$mes=substr($v_datos[5], 0, 2);
+	$ano=substr($v_datos[5], 6, 4);
+	$fecha2=$ano."-".$mes."-".$dia;
+	$result=mysql_query("insert into tbl_usuarios(nombre,apellidos,cedula,usuario,clave,fecha_vencimiento,estado,ids_accesos,ids_reportes)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".$v_datos[2]."','".$v_datos[3]."','".$v_datos[4]."','".$fecha2."','"."1"."','".$v_datos[6]."','".$v_datos[7]."')");
 	if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
-        	$jsondata['resultado'] = 'Success';
+        	$jsondata['resultado'] = 'Success';        	
         }
     echo json_encode($jsondata);
 }

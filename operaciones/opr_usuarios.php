@@ -28,7 +28,8 @@ if($total>0){
 }else{
 	$query="insert into tbl_usuarios(id_perfil,ids_analisis,ids_reportes,nombre,apellidos,cedula,usuario,pass,fecha_caducidad,estado)values('".$_REQUEST['id_permisos']."','".$_REQUEST['ids_analisis']."','".$_REQUEST['ids_reportes']."','".$_REQUEST['txt_nombre']."','".$_REQUEST['txt_apellidos']."','".$_REQUEST['txt_cedula']."','".$_REQUEST['txt_usuario']."','".$_REQUEST['txt_pass']."','".$fecha2."','"."1"."')";
 	$result = mysql_query($query);	
-	echo "Success";
+	//echo "Success";
+	echo $fecha2;
 }
 
 }//end if opcion 1
